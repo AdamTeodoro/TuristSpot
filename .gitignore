@@ -1,0 +1,5 @@
+# dependenci module
+/node_modules
+
+# exclude js files
+/dist

@@ -1,0 +1,10 @@
+0000000000000000000000000000000000000000 b10f102a9229e38100ca70d6066b6c6b66878b43 Adam Teodoro <sradamteodoro@gmail.com> 1652409419 -0300	clone: from https://github.com/velcis/touristspot.git
+b10f102a9229e38100ca70d6066b6c6b66878b43 b10f102a9229e38100ca70d6066b6c6b66878b43 Adam Teodoro <sradamteodoro@gmail.com> 1652409611 -0300	checkout: moving from master to adam
+b10f102a9229e38100ca70d6066b6c6b66878b43 3f2cede735fdc3b01994747bf3b5e51f5f23d8e3 Adam Teodoro <sradamteodoro@gmail.com> 1652490861 -0300	commit: create admin and user interfaces
+3f2cede735fdc3b01994747bf3b5e51f5f23d8e3 dd292b1d2034160e010afa784d09c9935ed2b0f0 Adam Teodoro <sradamteodoro@gmail.com> 1652503669 -0300	commit: create Interfaces
+dd292b1d2034160e010afa784d09c9935ed2b0f0 4bfdbe8f689f11073b851c6816745ccfc751b8fa Adam Teodoro <sradamteodoro@gmail.com> 1652503786 -0300	commit: create environment config
+4bfdbe8f689f11073b851c6816745ccfc751b8fa a5fd04dc5e3b655ddc44cb4bb7323a40a9a73477 Adam Teodoro <sradamteodoro@gmail.com> 1652677834 -0300	commit: create db connection, create sequelize instance, create user register
+a5fd04dc5e3b655ddc44cb4bb7323a40a9a73477 1cd640a7508cfdf8f1291eadd9dc3630712b5ded Adam Teodoro <sradamteodoro@gmail.com> 1652706157 -0300	commit: update request status
+1cd640a7508cfdf8f1291eadd9dc3630712b5ded 41d0a6cf4fad191a0c671997ed32fcf0b463a2ae Adam Teodoro <sradamteodoro@gmail.com> 1652760292 -0300	commit: add All Interface models
+41d0a6cf4fad191a0c671997ed32fcf0b463a2ae 4041c3d5d9e690e171d78133cc5142e10dc5eec3 Adam Teodoro <sradamteodoro@gmail.com> 1652760337 -0300	commit: create all tables
+4041c3d5d9e690e171d78133cc5142e10dc5eec3 54c31033089d11feedf6e76b981a661418e9c565 Adam Teodoro <sradamteodoro@gmail.com> 1652760379 -0300	commit: create all models
