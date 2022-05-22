@@ -7,4 +7,4 @@ export const HeaderSchema = Joi.object({
     .max(99999)
     .required()
 
-});
+}).unknown(true);

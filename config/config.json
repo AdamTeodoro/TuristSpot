@@ -4,7 +4,7 @@
     "username": "postgres",
     "password": "postgrespw",
     "database": "TURISTSPOT",
-    "port": "49155",
+    "port": "49154",
     "define": {
         "timestamps": true
     }

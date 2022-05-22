@@ -78,6 +78,14 @@ class TuristSpotService {
         this.turistSpotModel = this.build(sequelize);
     }
 
+    create(turistSpot: TuristSpotData) {
+        return this.turistSpotModel.create(turistSpot);
+    }
+
+    getById(id: number) {
+        return this.turistSpotModel.findOne({ where: { id } });
+    }
+
 }
 
 export const turistSpotService = new TuristSpotService(db);

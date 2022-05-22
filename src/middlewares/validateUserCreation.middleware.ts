@@ -15,7 +15,9 @@ export const validateUserCreationMiddleware = (req: Request, res: Response, next
     try {
         if (UserCreationSchema.validate(req).error) {
             res.status(400)
-            .json({ code: 'invalid-request-data' })
+            .json({ 
+                code: 'invalid-request-data',
+            })
             .end();
             return;
         } else {

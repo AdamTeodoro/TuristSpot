@@ -13,6 +13,6 @@ export const LoginSchema = Joi.object({
         .max(256)
         .required()
 
-    }).unknown(false)
+    }).unknown(true)
     
-});
+}).unknown(true);

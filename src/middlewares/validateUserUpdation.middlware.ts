@@ -1,18 +1,24 @@
 import { NextFunction, Response } from "express";
 
+import { UserUpdationSchema } from "../schemas/requests/UserUpdation.schema";
 
-import { UserCreationSchema } from "../schemas/requests/UserCreation.schema";
 import { UserData } from "../services/UserService";
 
 type Request = {
+    headers: {
+        authorization?: string,
+    },
     body: {
         user: UserData,
-        password: string
-    }
-}
-export const validateUserUpdation = (req: Request, res: Response, next: NextFunction) => {
+        pass: {
+            newPassword?: string,
+            oldPassword: string
+        }
+    },
+};
+export const validateUserUpdationMiddleware = (req: Request, res: Response, next: NextFunction) => {
     try {
-        if (UserCreationSchema.validate(req).error) {
+        if (UserUpdationSchema.validate(req).error) {
             res.status(400)
             .json({ code: 'invalid-request-data' })
             .end();

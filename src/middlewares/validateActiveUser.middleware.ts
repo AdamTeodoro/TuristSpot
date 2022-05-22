@@ -6,15 +6,16 @@ import { ISimpleUser } from "../interfaces/ISimpleUser";
 import { simpleUserService } from "../services/SimpleUserService";
 
 type Request = {
-    headers: any
-    body: any,
-    query: any,
-    idUser: number,
-    isActive: boolean,
+    headers: {
+        authorization?: string,
+    },
+    idUser?: number,
+    isActive?: boolean,
 }
 
 export const validateInactiveUser = async (req: Request, res: Response, next: NextFunction) => {
-    const simpleUser = await simpleUserService.getById(req.idUser) as ISimpleUser;
+    const idUser = req.idUser as number;
+    const simpleUser = await simpleUserService.getById(idUser) as ISimpleUser;
     if (simpleUser.isActive) {
         req.isActive = simpleUser.isActive;
         next();

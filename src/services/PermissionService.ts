@@ -11,6 +11,7 @@ export type PermissionModel = typeof Model & {
 export type PermissionData = {
     email: string;
     passwordHash: string;
+    expiration: Date
 }
 
 class PermisisonService {

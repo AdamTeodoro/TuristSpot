@@ -9,6 +9,7 @@ import { keyService } from "../services/KeyService";
 import { userService } from "../services/UserService";
 import { environmentService } from "../services/EnvironmentService";
 import { simpleUserService } from "../services/SimpleUserService";
+import { adminService } from "../services/AdminService";
 
 type Request = {
     body: {
@@ -29,10 +30,18 @@ export const LoginController = async (req: Request, res: Response) => {
             .end();
             return;
         }
-        //verify if user is active
-        const simpleUser = await simpleUserService.getIfActiveById(foundUser.id);
-        if (!simpleUser) {
-            res.json({ code: 'inactive-user'});
+        console.log(foundUser);
+        const admin = await adminService.getById(foundUser.id);
+        console.log(admin);
+        if (!admin) {
+            //verify if user is active
+            const simpleUser = await simpleUserService.getIfActiveById(foundUser.id);
+            if (!simpleUser) {
+                res.status(401)
+                .json({ code: 'inactive-user' })
+                .end();
+                return;
+            }
         }
         //get user founded key
         const key = await keyService.getById(foundUser.id) as IKey;
@@ -55,6 +64,7 @@ export const LoginController = async (req: Request, res: Response) => {
         .json({
             code: 'success-to-login',
             user: {
+                id: foundUser.id,
                 userName: foundUser.userName,
                 fullname: foundUser.fullName,
                 email: foundUser.email,

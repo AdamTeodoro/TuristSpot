@@ -1,9 +1,10 @@
-import { NextFunction, Response } from "express";
+import { NextFunction,  Response } from "express";
 
 import jwt from 'jsonwebtoken';
 
 import { environmentService } from "../services/EnvironmentService";
 import { simpleUserService } from "../services/SimpleUserService";
+import { UserData } from "../services/UserService";
 
 type TokenPayload = {
     id: string;
@@ -13,14 +14,14 @@ type TokenPayload = {
 
 type Request = {
     headers: {
-        authorization: string,
+        authorization?: string,
     },
-    idUser: number
+    idUser?: number
 };
 
 export const validateAuthMiddleware = (req: Request, res: Response, next: NextFunction) => {
     try {
-        const { authorization } = req.headers;
+        const authorization = req.headers.authorization as string;
         const { JWT_SECRET } = environmentService.getEnvironmnet();
         //validate user auth
         jwt.verify(authorization, JWT_SECRET, async (error, decoded) => {
@@ -31,19 +32,10 @@ export const validateAuthMiddleware = (req: Request, res: Response, next: NextFu
                 return;
             }
             const { id } = decoded as TokenPayload;
-            //validate if user is inactived
-            const simpleUser = await simpleUserService.getIfActiveById(Number(id));
-            if (simpleUser) {
-                //get idUser
-                req.idUser = Number(id);
-                next();
-                return;
-            } else {
-                res.status(401)
-                .json({ code: 'user-inactived-by-admin' })
-                .end();
-                return;
-            }
+            //get idUser
+            req.idUser = Number(id);
+            next();
+            return;
         });
     } catch {
         res.status(400)

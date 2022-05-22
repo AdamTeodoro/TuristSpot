@@ -1,13 +1,10 @@
 import { NextFunction, Response, Request } from "express";
 
-import { TuristSpotCreationSchema } from "../schemas/requests/TuristSpotCreation.schema";
+import { TuristSpotPictureCreationSchema } from "../schemas/requests/TuristSpotPictureCreation.schema";
 
-export const validateTuristSpotCreationMiddleware = (req: Request, res: Response, next: NextFunction) => {
+export const validateTuristSpotPictureCreationMiddleware = (req: Request, res: Response, next: NextFunction) => {
     try {
-        console.log("ok")
-        const { error, value } = TuristSpotCreationSchema.validate(req);
-        console.log(error);
-        if (error) {
+        if (TuristSpotPictureCreationSchema.validate(req).error) {
             res.status(400)
             .json({ code: 'invalid-request-data' })
             .end();

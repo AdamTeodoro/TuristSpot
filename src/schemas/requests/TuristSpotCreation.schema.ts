@@ -5,10 +5,10 @@ import { TuristSpotSchema } from "../objects/TuristSpot.schema";
 
 export const TuristSpotCreationSchema = Joi.object({
   
-    headers: HeaderSchema,
+    headers: HeaderSchema.required(),
 
     body: Joi.object({
-        turistSpot: TuristSpotSchema,
-    }),
+        turistSpot: TuristSpotSchema.required(),
+    }).required(),
 
 }).unknown(true);

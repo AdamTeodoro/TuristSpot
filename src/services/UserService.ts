@@ -47,12 +47,29 @@ class UserService {
     }
 
     getByEmail(email: string) {
-        return this.userModel
-        .findOne({
+        return this.userModel.findOne({
             where: {
                 email
             }
         });
+    }
+
+    getById(id: number) {
+        return this.userModel.findOne({
+            where: {
+                id
+            }
+        });
+    }
+
+    async update(id: number, user: UserData) {
+        const refUser = await this.userModel.findOne({
+            where: {
+                id
+            }
+        }) as IUser;
+        refUser.set(user);
+        return refUser.save();
     }
 
 }

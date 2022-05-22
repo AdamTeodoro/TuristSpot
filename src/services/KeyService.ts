@@ -34,7 +34,7 @@ class KeyService {
             email: {
                 type: DataTypes.STRING,
                 allowNull: false,
-                primaryKey: true,
+                unique: true,
                 references: {
                     model: "User",
                     key: 'email',
@@ -68,6 +68,12 @@ class KeyService {
 
     create(key: KeyData) {
         return this.keyModel.create(key);
+    }
+
+    async update(id: number, key: KeyData) {
+        const refKey = await this.keyModel.findOne({ where: { id } }) as IKey;
+        refKey.set(key);
+        return refKey.save();
     }
 }
 

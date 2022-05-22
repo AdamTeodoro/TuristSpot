@@ -1,4 +1,5 @@
 import { Response, NextFunction } from "express";
+import { rmSync } from "fs";
 
 import jwt from "jsonwebtoken";
 
@@ -23,6 +24,16 @@ export const validateAdminPermission = async (req: Request, res: Response, next:
         const permission = await permissionService.getById(idPermission);
         //verify with jwt if authorization is valid
         if (permission) {
+            //validate expiration time from permission
+            if (Date.now() > permission.expiration.getTime()) {
+                //update permission status
+                await permission.update({ isActive: false });
+                res.status(401)
+                .json({ code: 'permission-expired' })
+                .end();
+                return;
+            }
+            //verify if authorization is valid
             jwt.verify(
                 authorization,
                 permission.token,

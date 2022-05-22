@@ -12,11 +12,14 @@ type Request = {
 export const validateLoginMiddleware = (req: Request, res: Response, next: NextFunction) => {
     try {
         if (LoginSchema.validate(req).error) {
+            console.log(LoginSchema.validate(req).error?.details);
             res.status(400)
             .json({ code: 'invalid-request-data' })
             .end();
             return;
         }
+        next();
+        return;
     } catch {
         res.status(500)
         .json({ code: 'internal-server-error' })
