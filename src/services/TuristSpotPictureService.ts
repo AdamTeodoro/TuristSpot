@@ -75,14 +75,22 @@ class TuristSpotPictureService {
         return this.turistSpotPictureModel.findOne({ where: { id } });
     }
 
-    async update(idTuristSpotPicture: number, data: any) {
+    async update(id: number, data: any) {
         const refTuristSpotPicture = await this.turistSpotPictureModel.findOne({
             where: {
-                id: idTuristSpotPicture
+                id
             }
         }) as iTuristSpotPicture;
         refTuristSpotPicture.set(data);
         return refTuristSpotPicture.save();
+    }
+
+    async delete(id: number) {
+        return this.turistSpotPictureModel.destroy({
+            where: {
+                id
+            }
+        })
     }
 }
 
