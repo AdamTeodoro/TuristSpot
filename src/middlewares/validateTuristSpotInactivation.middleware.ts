@@ -2,7 +2,7 @@ import { NextFunction, Response, Request } from "express";
 
 import { TuristSpotInactivationSchema } from "../schemas/requests/TuristSpotInactivation.schema";
 
-export const validateTuristSpotInactivation = (req: Request, res: Response, next: NextFunction) => {
+export const validateTuristSpotInactivationMiddleware = (req: Request, res: Response, next: NextFunction) => {
     try {
         if (TuristSpotInactivationSchema.validate(req).error) {
             res.status(400)

@@ -9,9 +9,10 @@ export type PermissionModel = typeof Model & {
 }
 
 export type PermissionData = {
-    email: string;
-    passwordHash: string;
-    expiration: Date
+    idAdmin: number;
+    permissionHash: string;
+    expiration: Date;
+    isActive: boolean;
 }
 
 class PermisisonService {
@@ -34,8 +35,8 @@ class PermisisonService {
                     model: 'Admin'
                 }
             },
-            token: {
-                type: DataTypes.TEXT,
+            permissionHash: {
+                type: DataTypes.STRING,
                 allowNull: false,
             },
             expiration: {

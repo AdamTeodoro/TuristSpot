@@ -6,9 +6,6 @@ import { UserCreationSchema } from "../schemas/requests/UserCreation.schema";
 import { UserData } from "../services/UserService";
 
 type Request = {
-    headers: {
-        authorization?: string,
-    }
     body: {
         user: UserData,
         password: string

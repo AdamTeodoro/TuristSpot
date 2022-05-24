@@ -10,7 +10,7 @@ type Request = {
     }
 }
 
-export const validateAdminRatingDeletion = (req: Request, res: Response, next: NextFunction) => {
+export const validateAdminRatingDeletionMiddleware = (req: Request, res: Response, next: NextFunction) => {
     try {
         if (AdminRatingDeletionSchema.validate(req).error) {
             res.status(400)

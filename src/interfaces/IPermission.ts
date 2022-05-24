@@ -3,8 +3,9 @@ import { Model } from "sequelize";
 export interface IPermission extends Model {
     id: number; //idPermission
     idAdmin: number;
-    token: string;
+    permissionHash: string;
     expiration: Date;
+    isActive: boolean;
     createdAt: Date;
     updatedAt: Date;
 }

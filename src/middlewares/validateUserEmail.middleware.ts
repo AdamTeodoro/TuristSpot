@@ -3,11 +3,9 @@ import { NextFunction, Response } from "express";
 import { UserData, userService } from "../services/UserService";
 
 type Request = {
-    headers:{
-        authorization?: string,
-    }
     query: {
         idPermission: number,
+        authorization?: string,
     }
     body: {
         user: UserData,

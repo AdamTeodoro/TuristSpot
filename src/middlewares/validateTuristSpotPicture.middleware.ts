@@ -12,7 +12,7 @@ type Request = {
     idItem?: number,
 }
 
-export const validateTuristSpotPicture = async (req: Request, res: Response, next: NextFunction) => {
+export const validateTuristSpotPictureMiddleware = async (req: Request, res: Response, next: NextFunction) => {
     try {
         // const { originalname, filename } = req.file
         const idUser = req.idUser as number;

@@ -7,10 +7,8 @@ import { permissionService } from "../services/PermissionService";
 import { UserData } from "../services/UserService";
 
 type Request = {
-    headers:{
-        authorization?: string,
-    }
     query: {
+        authorization?: string,
         idPermission: number,
     }
     body: {
@@ -19,10 +17,10 @@ type Request = {
     }
 }
 
-export const validateAdminPermission = async (req: Request, res: Response, next: NextFunction) => {
+export const validateAdminPermissionMiddleware = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { idPermission } = req.query;
-        const authorization = req.headers.authorization as string;
+        const authorization = req.query.authorization as string;
         //get permission
         const permission = await permissionService.getById(idPermission);
         //verify with jwt if authorization is valid
@@ -39,7 +37,7 @@ export const validateAdminPermission = async (req: Request, res: Response, next:
             //verify if authorization is valid
             jwt.verify(
                 authorization,
-                permission.token,
+                permission.permissionHash,
                 async (error, decoded) => {
                     if (error) {
                         res.status(400)

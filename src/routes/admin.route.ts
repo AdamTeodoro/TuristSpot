@@ -1,3 +1,4 @@
+
 import { Router } from "express";
 
 import multer from "multer";
@@ -10,16 +11,18 @@ import { CreateTuristSpotController } from "../controllers/CreateTuristSpotContr
 import { CreateTuristSpotPicturesController } from "../controllers/CreateTuristSpotPicture";
 import { DeleteTuristSpotPicture } from "../controllers/DeleteTuristSpotPicture";
 import { InactiveTuristSpotController } from "../controllers/InactiveTuristSpotController";
+import { PermissionCreationController } from "../controllers/PermissionCreationController";
 import { UpdateTuristSpotController } from "../controllers/UpdateTuristSpotController";
 import { UpdateUserController } from "../controllers/UpdateUserController";
 
 import { validateAdminMiddleware } from "../middlewares/validateAdmin.middleware";
-import { validateAdminPermission } from "../middlewares/validateAdminPermission.middlware";
-import { validateAdminRatingDeletion } from "../middlewares/validateAdminratingDeletion.middleware";
+import { validateAdminPermissionMiddleware } from "../middlewares/validateAdminPermission.middlware";
+import { validateAdminRatingDeletionMiddleware } from "../middlewares/validateAdminratingDeletion.middleware";
 import { validateAuthMiddleware } from "../middlewares/validateAuth.middleware";
+import { validatePermissionCreationMiddleware } from "../middlewares/validatePermissionCreation.middleware";
 import { validateTuristSpotCreationMiddleware } from "../middlewares/validateTuristSpotCreation.middleware";
-import { validateTuristSpotInactivation } from "../middlewares/validateTuristSpotInactivation.middleware";
-import { validateTuristSpotPicture } from "../middlewares/validateTuristSpotPicture.middleware";
+import { validateTuristSpotInactivationMiddleware } from "../middlewares/validateTuristSpotInactivation.middleware";
+import { validateTuristSpotPictureMiddleware } from "../middlewares/validateTuristSpotPicture.middleware";
 import { validateTuristSpotPictureCreationMiddleware } from "../middlewares/validateTuristSpotPictureCreation.middleware";
 import { validateTuristSpotPictureDeletionMiddleware } from "../middlewares/validateTuristSpotPictureDeletion.middleware";
 import { validateTuristSpotUpdationMiddleware } from "../middlewares/validateTuristSpotUpdation.middleware";
@@ -30,10 +33,18 @@ import { validateUserUpdationMiddleware } from "../middlewares/validateUserUpdat
 const adminRoute = Router();
 
 adminRoute.post(
+    '/admin/permission/create',
+    validatePermissionCreationMiddleware,
+    validateAuthMiddleware,
+    validateAdminMiddleware,
+    PermissionCreationController
+)
+
+adminRoute.post(
     '/admin/register',
     validateUserCreationMiddleware,
     validateEmailExistsMiddleware,
-    validateAdminPermission,
+    validateAdminPermissionMiddleware,
     AdminRegisterController
 );
 
@@ -63,7 +74,7 @@ adminRoute.put(
 
 adminRoute.put(
     '/admin/turistSpot/inactive',
-    validateTuristSpotInactivation,
+    validateTuristSpotInactivationMiddleware,
     validateAuthMiddleware,
     validateAdminMiddleware,
     InactiveTuristSpotController
@@ -74,7 +85,7 @@ adminRoute.post(
     validateTuristSpotPictureCreationMiddleware,
     validateAuthMiddleware,
     validateAdminMiddleware,
-    validateTuristSpotPicture,
+    validateTuristSpotPictureMiddleware,
     multer(multerConfig).single('image'),
     CreateTuristSpotPicturesController
 );
@@ -89,7 +100,7 @@ adminRoute.delete(
 
 adminRoute.delete(
     '/admin/rating/delete',
-    validateAdminRatingDeletion,
+    validateAdminRatingDeletionMiddleware,
     validateAuthMiddleware,
     validateAdminMiddleware,
     AdminRatingDeletionController
