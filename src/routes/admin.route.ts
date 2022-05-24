@@ -14,6 +14,7 @@ import { validateAdminMiddleware } from "../middlewares/validateAdmin.middleware
 import { validateAdminPermission } from "../middlewares/validateAdminPermission.middlware";
 import { validateAuthMiddleware } from "../middlewares/validateAuth.middleware";
 import { validateTuristSpotCreationMiddleware } from "../middlewares/validateTuristSpotCreation.middleware";
+import { validateTuristSpotInactivation } from "../middlewares/validateTuristSpotInactivation.middleware";
 import { validateTuristSpotPicture } from "../middlewares/validateTuristSpotPicture.middleware";
 import { validateTuristSpotPictureCreationMiddleware } from "../middlewares/validateTuristSpotPictureCreation.middleware";
 import { validateTuristSpotUpdationMiddleware } from "../middlewares/validateTuristSpotUpdation.middleware";
@@ -55,6 +56,13 @@ adminRoute.put(
     UpdateTuristSpotController
 );
 
+adminRoute.put(
+    '/admin/turistSpot/inactive',
+    validateTuristSpotInactivation,
+    validateAuthMiddleware,
+    validateAdminMiddleware
+)
+
 adminRoute.post(
     '/admin/turistSpotPicture/create',
     validateTuristSpotPictureCreationMiddleware,
@@ -64,10 +72,5 @@ adminRoute.post(
     multer(multerConfig).single('image'),
     CreateTuristSpotPicturesController
 );
-
-adminRoute.post(
-    '/admin/',
-    
-)
 
 export { adminRoute };

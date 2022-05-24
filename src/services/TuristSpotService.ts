@@ -82,7 +82,7 @@ class TuristSpotService {
         return this.turistSpotModel.create(turistSpot);
     }
 
-    async update(id: number, turistSpot: TuristSpotData) {
+    async update(id: number, turistSpot: any) {
         const refturistSpot = await this.turistSpotModel.findOne({ where: { id }});
         if(refturistSpot) {
             refturistSpot.set(turistSpot);
