@@ -2,14 +2,14 @@ import Joi from "joi";
 
 import { HeaderSchema } from "../objects/Header.schema";
 
-export const TuristSpotPictureCreationSchema = Joi.object({
+export const RatingCreationSchema = Joi.object({
     headers: HeaderSchema.required(),
     query: Joi.object({
         idTuristSpot: Joi.number()
         .min(0)
         .max(99999999999)
         .required()
-    }),
+    }).required(),
     body: Joi.object({
         rating: Joi.object({
             
@@ -24,6 +24,6 @@ export const TuristSpotPictureCreationSchema = Joi.object({
             .required()
 
         }).required()
-    })
+    }).required()
 
 }).unknown(true);

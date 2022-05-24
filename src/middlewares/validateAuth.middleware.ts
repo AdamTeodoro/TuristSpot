@@ -3,8 +3,6 @@ import { NextFunction,  Response } from "express";
 import jwt from 'jsonwebtoken';
 
 import { environmentService } from "../services/EnvironmentService";
-import { simpleUserService } from "../services/SimpleUserService";
-import { UserData } from "../services/UserService";
 
 type TokenPayload = {
     id: string;

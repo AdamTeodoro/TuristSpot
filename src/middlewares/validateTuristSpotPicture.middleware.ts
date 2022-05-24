@@ -4,21 +4,23 @@ import { turistSpotPictureService } from "../services/TuristSpotPictureService";
 
 type Request = {
     query: {
-        idItem?: number
+        idTuristSpot?: number
     }
     idUser?: number,
     imgTable?: string,
     idPicture?: number,
+    idItem?: number,
 }
 
-export const validateTuristSpotMiddleware = async (req: Request, res: Response, next: NextFunction) => {
+export const validateTuristSpotPicture = async (req: Request, res: Response, next: NextFunction) => {
     try {
+        // const { originalname, filename } = req.file
         const idUser = req.idUser as number;
-        const idItem = Number(req.query.idItem);
-        req.imgTable = "TURISTSPOTPICTURES";
+        req.imgTable = "turistspotpictures";
+        //create picture from turistspot owner of idTuristSpot
         const turistSpotPicture = await turistSpotPictureService.create({
             idAdmin: idUser,
-            idTuristSpot: idItem,
+            idTuristSpot: Number(req.query.idTuristSpot),
         });
         req.idPicture = turistSpotPicture.id;
         next()

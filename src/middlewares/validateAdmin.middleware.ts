@@ -5,8 +5,8 @@ import { adminService } from "../services/AdminService";
 
 type Request = {
     headers: {
-        authorization?: string
-    }
+        authorization?: string,
+    },
     idUser?: number,
 }
 

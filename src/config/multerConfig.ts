@@ -29,7 +29,7 @@ export default {
         },
         //return the call back with de filne name
         filename: (req: any, file, cb) => {
-            cb(null, `${req.idPicture}_${extname(file.originalname)}`);
+            cb(null, `${req.idPicture}${extname(file.originalname)}`);
         }
     })
 };

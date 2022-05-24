@@ -1,4 +1,4 @@
-import { BuildOptions, DataTypes, Model, Sequelize} from 'sequelize';
+import { BuildOptions, DataTypes, Model, Sequelize, where} from 'sequelize';
 
 import { ITuristSpot } from '../interfaces/ITuristSpot';
 
@@ -80,6 +80,14 @@ class TuristSpotService {
 
     create(turistSpot: TuristSpotData) {
         return this.turistSpotModel.create(turistSpot);
+    }
+
+    async update(id: number, turistSpot: TuristSpotData) {
+        const refturistSpot = await this.turistSpotModel.findOne({ where: { id }});
+        if(refturistSpot) {
+            refturistSpot.set(turistSpot);
+            return refturistSpot.save();
+        }
     }
 
     getById(id: number) {

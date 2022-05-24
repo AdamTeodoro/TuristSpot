@@ -13,7 +13,7 @@ type Request = {
     isActive?: boolean,
 }
 
-export const validateInactiveUser = async (req: Request, res: Response, next: NextFunction) => {
+export const validateInactiveUserMiddleware = async (req: Request, res: Response, next: NextFunction) => {
     const idUser = req.idUser as number;
     const simpleUser = await simpleUserService.getById(idUser) as ISimpleUser;
     if (simpleUser.isActive) {

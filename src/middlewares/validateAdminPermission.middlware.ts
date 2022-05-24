@@ -7,8 +7,10 @@ import { permissionService } from "../services/PermissionService";
 import { UserData } from "../services/UserService";
 
 type Request = {
+    headers:{
+        authorization?: string,
+    }
     query: {
-        authorization: string,
         idPermission: number,
     }
     body: {
@@ -19,7 +21,8 @@ type Request = {
 
 export const validateAdminPermission = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const { authorization, idPermission } = req.query;
+        const { idPermission } = req.query;
+        const authorization = req.headers.authorization as string;
         //get permission
         const permission = await permissionService.getById(idPermission);
         //verify with jwt if authorization is valid

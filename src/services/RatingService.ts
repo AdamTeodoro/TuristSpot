@@ -8,6 +8,12 @@ export type RatingModel = typeof Model & {
  new (values?: Partial<IRating>, options?: BuildOptions): IRating
 }
 
+export type RatingData = {
+    commentary: string;
+    rating: number;
+    qtdImg: number;
+}
+
 class RatingService {
     private ratingModel: RatingModel;
 
@@ -41,12 +47,20 @@ class RatingService {
             rating: {
                 type: DataTypes.FLOAT,
                 allowNull: false,
+            },
+            qtdImg: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
             }
         }, { tableName: "RATINGS", timestamps: true }) as RatingModel;
     }
 
     constructor(sequelize: Sequelize) {
         this.ratingModel = this.build(sequelize);
+    }
+
+    create(rating: RatingData) {
+        return this.ratingModel.create();
     }
 }
 

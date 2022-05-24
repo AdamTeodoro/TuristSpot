@@ -4,10 +4,7 @@ import { TuristSpotCreationSchema } from "../schemas/requests/TuristSpotCreation
 
 export const validateTuristSpotCreationMiddleware = (req: Request, res: Response, next: NextFunction) => {
     try {
-        console.log("ok")
-        const { error, value } = TuristSpotCreationSchema.validate(req);
-        console.log(error);
-        if (error) {
+        if (TuristSpotCreationSchema.validate(req).error) {
             res.status(400)
             .json({ code: 'invalid-request-data' })
             .end();

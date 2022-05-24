@@ -7,8 +7,10 @@ import { keyService } from "../services/KeyService";
 import { UserData, userService } from "../services/UserService";
 
 type Request = {
+    headers: {
+        authorization?: string;
+    }
     query: {
-        authorization: string;
         idPermission: number;
     },
     body: {

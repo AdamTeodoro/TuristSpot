@@ -1,5 +1,8 @@
-# dependenci module
+# dependency module
 /node_modules
 
 # exclude js files
 /dist
+
+#exclude images folder 
+/images

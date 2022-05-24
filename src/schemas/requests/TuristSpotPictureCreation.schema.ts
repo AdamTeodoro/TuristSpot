@@ -4,7 +4,7 @@ import { HeaderSchema } from "../objects/Header.schema";
 
 export const TuristSpotPictureCreationSchema = Joi.object({
     query: Joi.object({
-        idItem: Joi.number()
+        idTuristSpot: Joi.number()
         .min(0)
         .max(9999999999999)
         .required(),

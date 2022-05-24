@@ -1,22 +1,19 @@
 import { NextFunction, Response } from "express";
 
-
-import { UserCreationSchema } from "../schemas/requests/UserCreation.schema";
+import { AdminCreationSchema } from "../schemas/requests/AdminCreation.schema";
 
 import { UserData } from "../services/UserService";
 
 type Request = {
-    headers: {
-        authorization?: string,
-    }
     body: {
         user: UserData,
         password: string
     }
 }
+
 export const validateUserCreationMiddleware = (req: Request, res: Response, next: NextFunction) => {
     try {
-        if (UserCreationSchema.validate(req).error) {
+        if (AdminCreationSchema.validate(req).error) {
             res.status(400)
             .json({ 
                 code: 'invalid-request-data',

@@ -2,6 +2,7 @@ import 'reflect-metadata';
 
 import express from 'express';
 
+import { resolve } from 'path';
 import { adminRoute } from './routes/admin.route';
 import { publicRoute } from './routes/public.route';
 import { userRoute } from './routes/user.route';
@@ -12,5 +13,6 @@ app.use(express.json());
 app.use(adminRoute);
 app.use(publicRoute);
 app.use(userRoute);
+app.use('/images', express.static(resolve(__filename, '..', '..', 'images')));
 
 app.listen(3333, () => console.log('Its running in port: http://localhost:3333'));

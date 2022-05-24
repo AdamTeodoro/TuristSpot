@@ -4,6 +4,8 @@ import { BuildOptions, DataTypes, Model, Sequelize} from 'sequelize';
 import { iTuristSpotPicture } from '../interfaces/ITuristSpotPicture';
 
 import { db } from '../database/database';
+import config from '../config/config';
+import { environmentService } from './EnvironmentService';
 
 export type TuristSpotPictureModel = typeof Model & {
  new (values?: Partial<iTuristSpotPicture>, options?: BuildOptions): iTuristSpotPicture
@@ -12,6 +14,8 @@ export type TuristSpotPictureModel = typeof Model & {
 export type TuristSpotPictureData = {
     idAdmin: number;
     idTuristSpot: number;
+    originalname?: string,
+    filename?: string;
 }
 
 class TuristSpotPictureService {
@@ -40,6 +44,21 @@ class TuristSpotPictureService {
                     key: 'id',
                     model: 'Admin'
                 }
+            },
+            filename: {
+                type: DataTypes.STRING,
+                allowNull: true,
+            },
+            originalname: {
+                type: DataTypes.STRING,
+                allowNull: true
+            },
+            imgUrl: {
+                type: DataTypes.VIRTUAL,
+                get() {
+                    const { URL_DEFAULT } = environmentService.getEnvironmnet();
+                    return `${URL_DEFAULT}/images/turistspotpictures/${this.getDataValue('filename')}`;
+                }
             }
         }, { tableName: "TURISTSPOTPICTURES", timestamps: true }) as TuristSpotPictureModel;
     }
@@ -54,6 +73,16 @@ class TuristSpotPictureService {
 
     getById(id: number){
         return this.turistSpotPictureModel.findOne({ where: { id } });
+    }
+
+    async update(idTuristSpotPicture: number, data: any) {
+        const refTuristSpotPicture = await this.turistSpotPictureModel.findOne({
+            where: {
+                id: idTuristSpotPicture
+            }
+        }) as iTuristSpotPicture;
+        refTuristSpotPicture.set(data);
+        return refTuristSpotPicture.save();
     }
 }
 
