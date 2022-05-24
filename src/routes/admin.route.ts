@@ -4,6 +4,7 @@ import multer from "multer";
 
 import multerConfig from "../config/multerConfig";
 
+import { AdminRatingDeletionController } from "../controllers/AdminRatingDeletionController";
 import { AdminRegisterController } from "../controllers/AdminRegisterController";
 import { CreateTuristSpotController } from "../controllers/CreateTuristSpotController";
 import { CreateTuristSpotPicturesController } from "../controllers/CreateTuristSpotPicture";
@@ -14,6 +15,7 @@ import { UpdateUserController } from "../controllers/UpdateUserController";
 
 import { validateAdminMiddleware } from "../middlewares/validateAdmin.middleware";
 import { validateAdminPermission } from "../middlewares/validateAdminPermission.middlware";
+import { validateAdminRatingDeletion } from "../middlewares/validateAdminratingDeletion.middleware";
 import { validateAuthMiddleware } from "../middlewares/validateAuth.middleware";
 import { validateTuristSpotCreationMiddleware } from "../middlewares/validateTuristSpotCreation.middleware";
 import { validateTuristSpotInactivation } from "../middlewares/validateTuristSpotInactivation.middleware";
@@ -83,6 +85,14 @@ adminRoute.delete(
     validateAuthMiddleware,
     validateAdminMiddleware,
     DeleteTuristSpotPicture
+);
+
+adminRoute.delete(
+    '/admin/rating/delete',
+    validateAdminRatingDeletion,
+    validateAuthMiddleware,
+    validateAdminMiddleware,
+    AdminRatingDeletionController
 );
 
 export { adminRoute };

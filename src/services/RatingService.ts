@@ -62,6 +62,10 @@ class RatingService {
     create(rating: RatingData) {
         return this.ratingModel.create();
     }
+
+    deleteById(id: number) {
+        return this.ratingModel.destroy({ where: { id }});
+    }
 }
 
 export const ratingService = new RatingService(db);
