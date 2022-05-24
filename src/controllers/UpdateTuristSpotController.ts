@@ -2,8 +2,6 @@ import { Response } from "express";
 
 import { TuristSpotData, turistSpotService } from "../services/TuristSpotService";
 
-import multer from "multer";
-
 type Request = {
     query: {
         idTuristSpot: number,
