@@ -27,10 +27,12 @@ Para rodar o projeto, iniciar com "npm start" ou "yarn start" para iniciar o ser
 Objetivos
 
 **
-1 - Feito e testado: ✅
-2 - Apenas feito: ✔️
-3 - Não feito: ❌**
-
+<b>
+    1 - Feito e testado: ✅
+    2 - Apenas feito: ✔️
+    3 - Não feito: ❌
+</b>
+**
 ## Requisitos:
 USUÁRIO ADMINISTRADOR
     - Registrar ✔️
@@ -52,7 +54,7 @@ USUÁRIO COMUM
 </br>
 
 PONTO TURÍSTICO
-    - Atualizar a média de avaliações de acordo com a pontuação dada pelo usuário ❌
+    - Atualizar a média de avaliações de acordo com a nota dada pelo usuário ✅
 
 </br>
 
