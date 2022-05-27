@@ -13,63 +13,22 @@ export type SimpleUserData = {
     isActive: boolean;
 }
 
-class SimpleUserService {
-    private simpleUserModel: SimpleUserModel;
-
-    private build(sequelize: Sequelize) {
-        return sequelize.define("SimpleUser", {
-            id: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                primaryKey: true,
-                references: {
-                    key: 'id',
-                    model: 'User'
-                }
-            },
-            isActive: {
-                type: DataTypes.BOOLEAN,
-                allowNull: false,
+function build(sequelize: Sequelize) {
+    return sequelize.define("SimpleUser", {
+        id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            primaryKey: true,
+            references: {
+                key: 'id',
+                model: 'User'
             }
-        }, { tableName: "SIMPLEUSERS", timestamps: false }) as SimpleUserModel;
-    }
-
-    constructor(sequelize: Sequelize) {
-        this.simpleUserModel = this.build(sequelize);
-    }
-
-    getIfActiveById(id: number) {
-        return this.simpleUserModel.findOne({
-            where: {
-                id,
-                isActive: true
-            }
-        });
-    }
-
-    getById(id: number) {
-        return this.simpleUserModel.findOne({
-            where: {
-                id
-            }
-        });
-    }
-
-    create(simpleUser: SimpleUserData) {
-        return this.simpleUserModel.create(simpleUser);
-    }
-
-    async update(id: number, simpleUser: any) {
-        const refSimpleUser = await this.simpleUserModel.findOne({
-            where: {
-                id
-            }
-        }) as ISimpleUser;
-        refSimpleUser.set(simpleUser);
-        return refSimpleUser.save();
-    }
-    
+        },
+        isActive: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+        }
+    }, { tableName: "SIMPLEUSERS", timestamps: false }) as SimpleUserModel;
 }
-
-export const simpleUserService = new SimpleUserService(db);
+export const simpleUserService = build(db);
 

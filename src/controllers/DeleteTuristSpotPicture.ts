@@ -17,7 +17,7 @@ type Request = {
     idUser?: number
 }
 
-export async function DeleteTuristSpotPicture(req: Request, res: Response) {
+export async function DeleteTuristSpotPictureController(req: Request, res: Response) {
     try {
         const idPicture = req.query.idPicture as number;
         const filename = req.query.filename as string
@@ -34,7 +34,13 @@ export async function DeleteTuristSpotPicture(req: Request, res: Response) {
         const unlink = promisify(fs.unlink);
         //delete picture file by path and if success delete in database
         await unlink(filePath)
-        .then(async () => await turistSpotPictureService.delete(idPicture))
+        .then(async () => { 
+            await turistSpotPictureService.destroy({
+                where: {
+                    id: idPicture
+                }
+            })
+        })
         .catch(error => {
             console.log(error);
             res.status(500)

@@ -1,6 +1,6 @@
 import { NextFunction, Response } from "express";
 
-import { simpleUserService } from "../services/SimpleUserService";
+import { SimpleUserModel, simpleUserService } from "../services/SimpleUserService";
 
 type Request = {
     headers: {
@@ -9,19 +9,16 @@ type Request = {
     query: {
         idSimpleUser?: number;
     },
-
 }
 
 export const AdminInactivateUserController = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const idSimpleUser = req.query.idSimpleUser as number;
         //verify if simpleUser exists
-        const simpleUser = await simpleUserService.getById(idSimpleUser)
-        if (simpleUser) {
+        const refSimpleUser = await simpleUserService.findByPk(idSimpleUser);
+        if (refSimpleUser) {
             //update simple user status
-            await simpleUserService.update(idSimpleUser, {
-                isActive: false
-            });
+            await refSimpleUser.update({ isActive: false });
         } else {
             res.status(401)
             .json({ code: 'fail-to-inactive-user' })

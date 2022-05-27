@@ -1,20 +1,16 @@
 import { NextFunction, Response } from "express";
 
-import { AdminInactivationSchema } from "../schemas/requests/AdminInactivationUserSchema";
-
+import { TuristSpotListSchema } from "../schemas/requests/TuristSpotList.schema";
 
 type Request = {
-    headers:{
-        authorization?: string;
-    },
     query: {
-        idSimpleUser?: number;
+        lastTuristSpot: Date
     }
-}
+};
 
-export const validateAdminInactiveUserMiddleware = async (req: Request, res: Response, next: NextFunction) => {
+export const validateTuristSpotListMiddleware = (req: Request, res: Response, next: NextFunction) => {
     try {
-        if (AdminInactivationSchema.validate(req).error) {
+        if (TuristSpotListSchema.validate(req).error) {
             res.status(400)
             .json({ code: 'invalid-request-data' })
             .end();
@@ -29,4 +25,4 @@ export const validateAdminInactiveUserMiddleware = async (req: Request, res: Res
         .end();
         return;
     }
-}
+};

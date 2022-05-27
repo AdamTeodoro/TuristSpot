@@ -16,7 +16,11 @@ type Request = {
 export const validateEmailExistsMiddleware = async (req: Request, res: Response, next: NextFunction) => {
     //verify if user email exists
     const user = req.body.user;
-    const foundUser = await userService.getByEmail(user.email);
+    const foundUser = await userService.findOne({ 
+        where: {
+            id: user.email
+        }
+    });
     if (foundUser) {
         res.status(403)
         .json({ code: 'email-already-registered' })

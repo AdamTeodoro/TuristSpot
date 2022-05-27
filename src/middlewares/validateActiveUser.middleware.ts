@@ -1,8 +1,6 @@
 
 import { Response, NextFunction } from "express";
 
-import { ISimpleUser } from "../interfaces/ISimpleUser";
-
 import { simpleUserService } from "../services/SimpleUserService";
 
 type Request = {
@@ -15,7 +13,7 @@ type Request = {
 
 export const validateInactiveUserMiddleware = async (req: Request, res: Response, next: NextFunction) => {
     const idUser = req.idUser as number;
-    const simpleUser = await simpleUserService.getById(idUser);
+    const simpleUser = await simpleUserService.findByPk(idUser);
     if (simpleUser && simpleUser.isActive) {
         req.isActive = simpleUser.isActive;
         next();

@@ -1,6 +1,4 @@
 import { Response, NextFunction } from "express";
-import { rmSync } from "fs";
-
 import jwt from "jsonwebtoken";
 
 import { permissionService } from "../services/PermissionService";
@@ -22,41 +20,40 @@ export const validateAdminPermissionMiddleware = async (req: Request, res: Respo
         const { idPermission } = req.query;
         const authorization = req.query.authorization as string;
         //get permission
-        const permission = await permissionService.getById(idPermission);
+        const refPermission = await permissionService.findByPk(idPermission);
         //verify with jwt if authorization is valid
-        if (permission) {
-            //validate expiration time from permission
-            if (Date.now() > permission.expiration.getTime()) {
-                //update permission status
-                await permission.update({ isActive: false });
-                res.status(401)
-                .json({ code: 'permission-expired' })
-                .end();
-                return;
-            }
-            //verify if authorization is valid
-            jwt.verify(
-                authorization,
-                permission.permissionHash,
-                async (error, decoded) => {
-                    if (error) {
-                        res.status(400)
-                        .json({ code: 'invalid-authorization'})
-                        .end();
-                        return;
-                    }
-                    //inactive permission if valid
-                    await permission.update({ isActive: false });
-                    next();
-                    return;
-                }
-            );
-        } else {
+        if (!refPermission) {
             res.status(400)
             .json({ code: 'invalid-permission' })
             .end();
             return;
         }
+        //validate expiration time from permission
+        if (Date.now() > refPermission.expiration.getTime()) {
+            //update permission status
+            await refPermission.update({ isActive: false });
+            res.status(401)
+            .json({ code: 'permission-expired' })
+            .end();
+            return;
+        }
+        //verify if authorization is valid
+        jwt.verify(
+            authorization,
+            refPermission.permissionHash,
+            async (error, decoded) => {
+                if (error) {
+                    res.status(400)
+                    .json({ code: 'invalid-authorization'})
+                    .end();
+                    return;
+                }
+                //inactive permission if valid
+                await refPermission.update({ isActive: false });
+                next();
+                return;
+            }
+        );
     } catch {
         res.status(400)
         .json({ code: 'invalid-credencials' })

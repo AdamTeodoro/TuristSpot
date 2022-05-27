@@ -23,7 +23,7 @@ export async function CreateRatingController(req: Request, res: Response) {
         const { idTuristSpot } = req.query;
 
         //verify if turistspot id is valid
-        const refturistSpot = await turistSpotService.getById(idTuristSpot)
+        const refturistSpot = await turistSpotService.findByPk(idTuristSpot)
         if (!refturistSpot) {
             res.status(400)
             .json({ code: 'invalid-turistspot-id' })
@@ -34,13 +34,11 @@ export async function CreateRatingController(req: Request, res: Response) {
         const sumAverage = (refturistSpot.qtdRatings * refturistSpot.average);
         const newSumaverage = sumAverage + rating.rating;
         const newQtdRating = refturistSpot.qtdRatings + 1;
-        //set new data
-        refturistSpot.set({
-            qtdRatings: newQtdRating,
-            average: newSumaverage / newQtdRating
-        });
         // update turist spot
-        await refturistSpot.save();
+        refturistSpot.update({
+            qtdRatings: newQtdRating,
+            average: (newSumaverage / newQtdRating)
+        });
         //create rating
         const createdRating = await ratingService.create({
             idTuristSpot: req.query.idTuristSpot,

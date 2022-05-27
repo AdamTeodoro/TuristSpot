@@ -3,8 +3,9 @@ import { NextFunction, Response } from "express";
 import { IRating } from "../interfaces/IRating";
 import { ITuristSpot } from "../interfaces/ITuristSpot";
 
-import { ratingService } from "../services/RatingService";
-import { turistSpotService } from "../services/TuristSpotService";
+import { RatingModel, ratingService } from "../services/RatingService";
+import { TuristSpotModel, turistSpotService } from "../services/TuristSpotService";
+
 
 type Request = {
     headers: {
@@ -19,23 +20,20 @@ export const AdminRatingDeletionController = async (req: Request, res: Response,
     try {
         const idRating = req.query.idRating as number;
         //get rating to calculate turistspot average
-        const refRating = await ratingService.getById(idRating) as IRating;
+        const refRating = await ratingService.findByPk(idRating) as IRating;
         //get turistspot to calculate turistspot average
-        const refTuristspot = await turistSpotService.getById(refRating.idTuristSpot) as ITuristSpot;
+        const refTuristspot = await turistSpotService.findByPk(refRating.idTuristSpot) as ITuristSpot;
         //get turistspot to calculate turistspot average
         const newSumAverage = refTuristspot.average - refRating.rating;
         const newQtdRatings = refTuristspot.qtdRatings - 1;
         const newAverage = newSumAverage / newQtdRatings;
         //update turistspot
-        await turistSpotService.update(
-            refRating.idTuristSpot,
-            {
-                qtdRatings: newQtdRatings,
-                average: newAverage
-            }
-        );
+        await refTuristspot.update({
+            qtdRatings: newQtdRatings,
+            average: newAverage
+        });
         //delete rating by id
-        await ratingService.deleteById(idRating);
+        await ratingService.destroy({ where: { id: idRating }});
         //send success mensage
         res.status(200)
         .json({ code: 'success-to-delete-rating' })

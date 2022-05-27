@@ -22,23 +22,9 @@ function build(sequelize: Sequelize) {
     }, { tableName: "ADMINS", timestamps: false }) as AdminModel;
 }
 
-const adminModel = build(db);
-
 export type AdminData = {
     id: number;
 }
 
-class AdminService {
-    constructor(private adminModel: AdminModel) { }
+export const adminService = build(db);
 
-    create(adminData: AdminData) {
-        return this.adminModel.create(adminData);
-    }
-
-    getById(id: number) {
-        return this.adminModel.findOne({ where: { id }});
-    }
-    
-}
-
-export const adminService = new AdminService(adminModel);

@@ -22,7 +22,11 @@ export const LoginController = async (req: Request, res: Response) => {
     try {
         const { email, password } = req.body;
         //get user by email
-        const foundUser = await userService.getByEmail(email);
+        const foundUser = await userService.findOne({
+            where: {
+                id: email
+            }
+        });
         //if user not found reject request access
         if (!foundUser) {
             res.status(400)
@@ -30,21 +34,26 @@ export const LoginController = async (req: Request, res: Response) => {
             .end();
             return;
         }
-        console.log(foundUser);
-        const admin = await adminService.getById(foundUser.id);
-        console.log(admin);
+        //
+        const admin = await adminService.findByPk(foundUser.id);
+        //if is not admin, verify if user is actived
         if (!admin) {
             //verify if user is active
-            const simpleUser = await simpleUserService.getIfActiveById(foundUser.id);
+            const simpleUser = await simpleUserService.findOne({
+                where: {
+                    id: foundUser.id,
+                    isActive: true
+                }
+            });
             if (!simpleUser) {
                 res.status(401)
-                .json({ code: 'inactive-user' })
+                .json({ code: 'inactived-user' })
                 .end();
                 return;
             }
         }
         //get user founded key
-        const key = await keyService.getById(foundUser.id) as IKey;
+        const key = await keyService.findByPk(foundUser.id) as IKey;
         //verify if user password is valid
         const isValidPassword = await bcrypt.compare(password, key.passwordHash);
         if (!isValidPassword) {

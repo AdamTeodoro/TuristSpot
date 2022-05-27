@@ -13,8 +13,8 @@ type Request = {
 export const validateAdminMiddleware = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const idUser = req.idUser as number;
-        const admin = await adminService.getById(idUser);
-        if (admin) {
+        const refAdmin = await adminService.findByPk(idUser);
+        if (refAdmin) {
             next();
             return;
         } else {

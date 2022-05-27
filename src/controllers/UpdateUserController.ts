@@ -7,6 +7,7 @@ import { IKey } from "../interfaces/IKey";
 
 import { keyService } from "../services/KeyService";
 import { UserData, userService } from "../services/UserService";
+import { IUser } from "../interfaces/IUser";
 
 type Request = {
     body: {
@@ -25,9 +26,9 @@ export async function UpdateUserController(req: Request, res: Response) {
         const { user, pass } = req.body
         const idUser = req.idUser as number;
         //get user founded key
-        const key = await keyService.getById(idUser) as IKey;
+        const refKey = await keyService.findByPk(idUser) as IKey;
         //verify if user password is valid
-        const isValidPassword = await bcrypt.compare(pass.oldPassword, key.passwordHash);
+        const isValidPassword = await bcrypt.compare(pass.oldPassword, refKey.passwordHash);
         if (!isValidPassword) {
             res.status(400)
             .json({ code: 'invalid-credencials' })
@@ -35,22 +36,21 @@ export async function UpdateUserController(req: Request, res: Response) {
             return;
         }
         //update user
-        const updatedUser = await userService.update(idUser, user);
-        const isUpdatingEmail = key.email !== user.email;
+        const refUser = await userService.findByPk(idUser) as IUser;
+        const updatedUser = await refUser.update(user);
+        //get is Updating email
+        const isUpdatingEmail = refKey.email !== user.email;
         //verify if user are updating email or password
         if (
             isUpdatingEmail ||
             pass.newPassword
         ) {
             //update email and passoword if user ar updating password
-            await keyService.update(
-                idUser, 
-                {
-                    id: idUser,
-                    email: updatedUser.email,
-                    passwordHash: pass.newPassword? pass.newPassword: pass.oldPassword
-                }
-            )
+            await refKey.update({
+                id: idUser,
+                email: updatedUser.email,
+                passwordHash: pass.newPassword? pass.newPassword: pass.oldPassword
+            });
         }
         //send user created
         res.status(200)

@@ -11,58 +11,50 @@ export type RatingPictureModel = typeof Model & {
  new (values?: Partial<IRating>, options?: BuildOptions): IRatingPicture
 }
 
-class RatingPictureService {
-    private ratingPictureModel: RatingPictureModel;
-
-    private build(sequelize: Sequelize) {
-        return sequelize.define("RatingPicture", {
-            id: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                primaryKey: true,
-                autoIncrement: true
-            },
-            idSimpleUser: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                references: {
-                    key: 'id',
-                    model: 'SimpleUser'
-                }
-            },
-            idTuristSpot: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                references: {
-                    key: 'id',
-                    model: 'TuristSpot'
-                }
-            },
-            idRating: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                references: {
-                    key: 'id',
-                    model: 'Rating'
-                }
-            },
-            originalname: {
-                type: STRING,
-                allowNull: false
-            },
-            filename: {
-                type: STRING,
-                allowNull: false
-            },
-            imgUrl: {
-                type: DataTypes.VIRTUAL
+function build(sequelize: Sequelize) {
+    return sequelize.define("RatingPicture", {
+        id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            primaryKey: true,
+            autoIncrement: true
+        },
+        idSimpleUser: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                key: 'id',
+                model: 'SimpleUser'
             }
-        }, { tableName: "RATINGPICTURES", timestamps: true }) as RatingPictureModel;
-    }
-
-    constructor(sequelize: Sequelize) {
-        this.ratingPictureModel = this.build(sequelize);
-    }
+        },
+        idTuristSpot: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                key: 'id',
+                model: 'TuristSpot'
+            }
+        },
+        idRating: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                key: 'id',
+                model: 'Rating'
+            }
+        },
+        originalname: {
+            type: STRING,
+            allowNull: false
+        },
+        filename: {
+            type: STRING,
+            allowNull: false
+        },
+        imgUrl: {
+            type: DataTypes.VIRTUAL
+        }
+    }, { tableName: "RATINGPICTURES", timestamps: true }) as RatingPictureModel;
 }
 
-export const ratingService = new RatingPictureService(db);
+export const ratingPictureService = build(db);

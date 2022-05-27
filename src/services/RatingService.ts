@@ -16,66 +16,42 @@ export type RatingData = {
     qtdImg: number;
 }
 
-class RatingService {
-    private ratingModel: RatingModel;
-
-    private build(sequelize: Sequelize) {
-        return sequelize.define("Rating", {
-            id: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                primaryKey: true,
-            },
-            idSimpleUser: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                references: {
-                    key: 'id',
-                    model: 'SimpleUser'
-                }
-            },
-            idTuristSpot: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                references: {
-                    key: 'id',
-                    model: 'TuristSpot'
-                }
-            },
-            commentary: {
-                type: DataTypes.TEXT,
-                allowNull: false,
-            },
-            rating: {
-                type: DataTypes.FLOAT,
-                allowNull: false,
-            },
-            qtdImg: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
+function build(sequelize: Sequelize) {
+    return sequelize.define("Rating", {
+        id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            primaryKey: true,
+        },
+        idSimpleUser: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                key: 'id',
+                model: 'SimpleUser'
             }
-        }, { tableName: "RATINGS", timestamps: true }) as RatingModel;
-    }
-
-    constructor(sequelize: Sequelize) {
-        this.ratingModel = this.build(sequelize);
-    }
-
-    create(rating: RatingData) {
-        return this.ratingModel.create();
-    }
-
-    getById(id: number) {
-        return this.ratingModel.findOne({
-            where: {
-                id
+        },
+        idTuristSpot: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                key: 'id',
+                model: 'TuristSpot'
             }
-        })
-    }
-
-    deleteById(id: number) {
-        return this.ratingModel.destroy({ where: { id }});
-    }
+        },
+        commentary: {
+            type: DataTypes.TEXT,
+            allowNull: false,
+        },
+        rating: {
+            type: DataTypes.FLOAT,
+            allowNull: false,
+        },
+        qtdImg: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        }
+    }, { tableName: "RATINGS", timestamps: true }) as RatingModel;
 }
 
-export const ratingService = new RatingService(db);
+export const ratingService = build(db);
