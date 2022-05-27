@@ -36,10 +36,10 @@ Objetivos
 ## Requisitos:
 USUÁRIO ADMINISTRADOR
     - Registrar ✔️
-    - Fazer login ✅
-    - Atualizar perfil ✅
-    - Criar ponto turístico ✅
-    - Alterar ponto turístico ✅
+    - Fazer login ✔️
+    - Atualizar perfil ✔️
+    - Criar ponto turístico ✔️
+    - Alterar ponto turístico ✔️
     - Inativar ponto turístico ✔️
     - Remover avaliação do usuário ✔️
     - Inativar usuários ✔️
@@ -47,10 +47,10 @@ USUÁRIO ADMINISTRADOR
 </br>
 
 USUÁRIO COMUM
-    - Criar avaliação do ponto turístico ✅
-    - Registrar ✅
-    - Fazer login ✅
-    - Atualizar perfil ✅
+    - Criar avaliação do ponto turístico ✔️
+    - Registrar ✔️
+    - Fazer login ✔️
+    - Atualizar perfil ✔️
 </br>
 
 PONTO TURÍSTICO
