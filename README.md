@@ -54,7 +54,7 @@ USUÁRIO COMUM
 </br>
 
 PONTO TURÍSTICO
-    - Atualizar a média de avaliações de acordo com a nota dada pelo usuário ✅
+    - Atualizar a média de avaliações de acordo com a nota dada pelo usuário ✔️
 
 </br>
 

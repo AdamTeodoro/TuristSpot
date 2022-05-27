@@ -65,6 +65,14 @@ class RatingService {
         return this.ratingModel.create();
     }
 
+    getById(id: number) {
+        return this.ratingModel.findOne({
+            where: {
+                id
+            }
+        })
+    }
+
     deleteById(id: number) {
         return this.ratingModel.destroy({ where: { id }});
     }
