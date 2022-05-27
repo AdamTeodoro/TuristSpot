@@ -23,19 +23,10 @@ export const validateRatingCreationMiddleware = async (req: Request, res: Respon
             .json({ code: 'invalid-request-data' })
             .end();
             return;
-        }
-        const { idTuristSpot } = req.query;
-        //verify if turistspot id is valid
-        const refturistSpot = await turistSpotService.getById(idTuristSpot)
-        if (!refturistSpot) {
-            res.status(400)
-            .json({ code: 'invalid-turistspot-id' })
-            .end();
+        } else {
+            next();
             return;
         }
-        next();
-        return;
-    
     } catch {
         res.status(500)
         .json({ code: 'internal-server-error' })

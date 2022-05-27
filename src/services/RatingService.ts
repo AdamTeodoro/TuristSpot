@@ -9,6 +9,8 @@ export type RatingModel = typeof Model & {
 }
 
 export type RatingData = {
+    idTuristSpot: number;
+    idSimpleUser: number;
     commentary: string;
     rating: number;
     qtdImg: number;

@@ -1,7 +1,6 @@
 import { Router } from "express";
-import { CreateRatingController } from "../controllers/CreateRatingController";
-import { CreateTuristSpotController } from "../controllers/CreateTuristSpotController";
 
+import { CreateRatingController } from "../controllers/CreateRatingController";
 import { UpdateUserController } from "../controllers/UpdateUserController";
 import { UserRegisterController } from "../controllers/UserRegisterController";
 
@@ -27,7 +26,7 @@ userRoute.put(
     validateAuthMiddleware,
     validateInactiveUserMiddleware,
     UpdateUserController
-)
+);
 
 userRoute.post(
     '/user/rating/create',
@@ -35,6 +34,6 @@ userRoute.post(
     validateAuthMiddleware,
     validateInactiveUserMiddleware,
     CreateRatingController,
-)
+);
 
 export { userRoute };

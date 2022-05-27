@@ -58,6 +58,16 @@ class SimpleUserService {
     create(simpleUser: SimpleUserData) {
         return this.simpleUserModel.create(simpleUser);
     }
+
+    async update(id: number, simpleUser: any) {
+        const refSimpleUser = await this.simpleUserModel.findOne({
+            where: {
+                id
+            }
+        }) as ISimpleUser;
+        refSimpleUser.set(simpleUser);
+        return refSimpleUser.save();
+    }
     
 }
 

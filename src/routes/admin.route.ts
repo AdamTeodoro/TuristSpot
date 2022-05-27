@@ -5,6 +5,7 @@ import multer from "multer";
 
 import multerConfig from "../config/multerConfig";
 
+import { AdminInactivateUserController } from "../controllers/AdminInactiveUserController";
 import { AdminRatingDeletionController } from "../controllers/AdminRatingDeletionController";
 import { AdminRegisterController } from "../controllers/AdminRegisterController";
 import { CreateTuristSpotController } from "../controllers/CreateTuristSpotController";
@@ -16,8 +17,9 @@ import { UpdateTuristSpotController } from "../controllers/UpdateTuristSpotContr
 import { UpdateUserController } from "../controllers/UpdateUserController";
 
 import { validateAdminMiddleware } from "../middlewares/validateAdmin.middleware";
+import { validateAdminInactiveUserMiddleware } from "../middlewares/validateAdminInactiveUser.middleware";
 import { validateAdminPermissionMiddleware } from "../middlewares/validateAdminPermission.middlware";
-import { validateAdminRatingDeletionMiddleware } from "../middlewares/validateAdminratingDeletion.middleware";
+import { validateAdminRatingDeletionMiddleware } from "../middlewares/validateAdminRatingDeletion.middleware";
 import { validateAuthMiddleware } from "../middlewares/validateAuth.middleware";
 import { validatePermissionCreationMiddleware } from "../middlewares/validatePermissionCreation.middleware";
 import { validateTuristSpotCreationMiddleware } from "../middlewares/validateTuristSpotCreation.middleware";
@@ -38,7 +40,7 @@ adminRoute.post(
     validateAuthMiddleware,
     validateAdminMiddleware,
     PermissionCreationController
-)
+);
 
 adminRoute.post(
     '/admin/register',
@@ -78,7 +80,7 @@ adminRoute.put(
     validateAuthMiddleware,
     validateAdminMiddleware,
     InactiveTuristSpotController
-)
+);
 
 adminRoute.post(
     '/admin/turistSpotPicture/create',
@@ -104,6 +106,14 @@ adminRoute.delete(
     validateAuthMiddleware,
     validateAdminMiddleware,
     AdminRatingDeletionController
+);
+
+adminRoute.put(
+    '/admin/simpleuser/inactive',
+    validateAdminInactiveUserMiddleware,
+    validateAuthMiddleware,
+    validateAdminMiddleware,
+    AdminInactivateUserController,
 );
 
 export { adminRoute };

@@ -10,6 +10,7 @@ export interface ITuristSpot extends Model{
     city: string;
     street: string;
     postalCode: string;
+    qtdRatings: number;
     isActive: boolean; //status
     createdAt: Date;
     updatedAt: Date;

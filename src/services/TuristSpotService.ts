@@ -17,6 +17,7 @@ export type TuristSpotData = {
     city: string;
     street: string;
     postalCode: string;
+    qtdRatings: number;
     isActive: boolean; //status
 }
 
@@ -44,6 +45,10 @@ class TuristSpotService {
                 allowNull: false,
             },
             totalVisitsReceived: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+            },
+            qtdRatings: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
             },

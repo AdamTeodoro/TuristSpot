@@ -15,9 +15,7 @@ export const validateUserCreationMiddleware = (req: Request, res: Response, next
     try {
         if (AdminCreationSchema.validate(req).error) {
             res.status(400)
-            .json({ 
-                code: 'invalid-request-data',
-            })
+            .json({ code: 'invalid-request-data' })
             .end();
             return;
         } else {

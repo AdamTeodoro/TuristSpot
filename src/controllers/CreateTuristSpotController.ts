@@ -25,7 +25,8 @@ export async function CreateTuristSpotController(req: Request, res: Response) {
             postalCode: turistSpot.postalCode,
             state: turistSpot.state,
             street: turistSpot.street,
-            totalVisitsReceived: turistSpot.totalVisitsReceived
+            totalVisitsReceived: turistSpot.totalVisitsReceived,
+            qtdRatings: 0
         });
         //send turist spot
         res.status(200)
