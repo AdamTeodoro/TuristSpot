@@ -9,7 +9,7 @@ type Request = {
     },
     idUser?: number,
     isActive?: boolean,
-}
+};
 
 export const validateInactiveUserMiddleware = async (req: Request, res: Response, next: NextFunction) => {
     const idUser = req.idUser as number;

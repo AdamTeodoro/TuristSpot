@@ -11,6 +11,5 @@ export const AdminInactivationSchema = Joi.object({
         .min(0)
         .max(9999999999999)
         .required()
-    });
-    
+    })
 });
