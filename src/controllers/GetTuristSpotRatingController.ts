@@ -14,6 +14,14 @@ export const GetTuristSpotRatingController = async (req: Request, res: Response)
     try {
         const { idTuristSpot, lastRating } = req.query;
         let ratingList = [];
+
+        const refTuristSpot = await turistSpotService.findByPk(idTuristSpot);
+        if (!refTuristSpot || !refTuristSpot.isActive) {
+            res.status(400)
+            .json({ code: 'invalid-request-data' })
+            .end();
+            return;
+        }
         //verify if last rating exists
         if (lastRating) {
             //if lastRating exists paginate data
@@ -41,6 +49,7 @@ export const GetTuristSpotRatingController = async (req: Request, res: Response)
         res.status(200)
         .json({ 
             code: 'success-to-list-ratings',
+            turistSpotFounded: refTuristSpot, 
             ratingList
         })
     } catch {
