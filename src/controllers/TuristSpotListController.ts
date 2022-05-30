@@ -20,11 +20,11 @@ export const TuristSpotListController = async (req: Request, res: Response, next
                 where: {
                     isActive: true,
                     start: {
-                        [Op.between]: [lastTuristSpot, Date.now()],
+                        [Op.between]: [lastTuristSpot, new Date(0)],
                     },
                 },
                 limit: 25,
-                order: [['lastTuristSpot', 'desc']],
+                order: [['createdAt', 'desc']],
             });
         } else {
             //list first 25 turistspots if is active
@@ -33,7 +33,7 @@ export const TuristSpotListController = async (req: Request, res: Response, next
                     isActive: true
                 },
                 limit: 25,
-                order: [['lastTuristSpot', 'desc']],
+                order: [['createdAt', 'desc']],
             });
         }
         // res send to listTuristSpots
