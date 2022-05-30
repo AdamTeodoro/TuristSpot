@@ -60,7 +60,7 @@ PONTO TURÍSTICO
 
 PÚBLICO
     - listagem de pontos turísticos se estiver ativo ✔️
-    - listagem das avaliações de um ponto turístico ❌
+    - listagem das avaliações de um ponto turístico ✔️
     - buscar ponto turístico pelo cep, endereço, cidade e estado ✔️
 
 </br>
