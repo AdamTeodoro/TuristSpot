@@ -9,10 +9,10 @@ import { AdminInactivateUserController } from "../controllers/AdminInactiveUserC
 import { AdminRatingDeletionController } from "../controllers/AdminRatingDeletionController";
 import { AdminRegisterController } from "../controllers/AdminRegisterController";
 import { CreateTuristSpotController } from "../controllers/CreateTuristSpotController";
-import { CreateTuristSpotPicturesController } from "../controllers/CreateTuristSpotPicture";
-import { DeleteTuristSpotPictureController } from "../controllers/DeleteTuristSpotPicture";
+import { CreateTuristSpotPicturesController } from "../controllers/CreateTuristSpotPictureController";
+import { DeleteTuristSpotPicturesController } from "../controllers/DeleteTuristSpotPicturesController";
 import { InactiveTuristSpotController } from "../controllers/InactiveTuristSpotController";
-import { PermissionCreationController } from "../controllers/PermissionCreationController";
+import { CreationPermissionController } from "../controllers/CreationPermissionController";
 import { UpdateTuristSpotController } from "../controllers/UpdateTuristSpotController";
 import { UpdateUserController } from "../controllers/UpdateUserController";
 
@@ -39,7 +39,7 @@ adminRoute.post(
     validatePermissionCreationMiddleware,
     validateAuthMiddleware,
     validateAdminMiddleware,
-    PermissionCreationController
+    CreationPermissionController
 );
 
 adminRoute.post(
@@ -97,7 +97,7 @@ adminRoute.delete(
     validateTuristSpotPictureDeletionMiddleware,
     validateAuthMiddleware,
     validateAdminMiddleware,
-    DeleteTuristSpotPictureController
+    DeleteTuristSpotPicturesController
 );
 
 adminRoute.delete(

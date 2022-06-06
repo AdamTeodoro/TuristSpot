@@ -6,9 +6,10 @@ export const UserCreationSchema = Joi.object({
     query: Joi.object({
 
         idPermission: Joi.number()
-        .min(0)
-        .max(999999999999)
-
+        .integer()
+        .min(1)
+        .max(9999999999999)
+    
     }).unknown(false),
 
     body: Joi.object({
@@ -18,8 +19,9 @@ export const UserCreationSchema = Joi.object({
         password: Joi.string()
         .min(8)
         .max(256)
-        .required()
-
-    }).unknown(false).required(),
+        .required(),
+        
+    }).unknown(false)
+    .required(),
 
 }).unknown(true);

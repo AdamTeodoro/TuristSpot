@@ -14,7 +14,7 @@ type Request = {
     }
 }
 
-export const TuristSpotFindController = async (req: Request, res: Response) => {
+export const FindTuristSpotController = async (req: Request, res: Response) => {
     try {
         const {
             postalCode,

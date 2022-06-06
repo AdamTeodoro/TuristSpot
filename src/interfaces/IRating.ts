@@ -6,6 +6,7 @@ export interface IRating extends Model {
     idTuristSpot: number;
     commentary: string;
     rating: number;
+    qtdImg: number;
     createdAt: Date;
     updatedAt: Date;
 }

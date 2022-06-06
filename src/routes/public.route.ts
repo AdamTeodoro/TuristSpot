@@ -1,7 +1,7 @@
 import { Router } from "express";
 
 import { LoginController } from "../controllers/LoginController";
-import { TuristSpotFindController } from "../controllers/TuristSpotFindController";
+import { FindTuristSpotController } from "../controllers/FindTuristSpotController";
 import { TuristSpotListController } from "../controllers/TuristSpotListController";
 
 import { validateLoginMiddleware } from "../middlewares/validateLogin.middleware";
@@ -31,7 +31,7 @@ publicRoute.get(
 publicRoute.get(
     '/turistspot/find',
     validateTuristSpotFindMiddleware,
-    TuristSpotFindController,
-)
+    FindTuristSpotController,
+);
 
 export { publicRoute };

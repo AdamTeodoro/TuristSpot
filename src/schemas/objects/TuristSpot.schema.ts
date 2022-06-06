@@ -3,12 +3,13 @@ import Joi from "joi";
 export const TuristSpotSchema = Joi.object({
 
     average: Joi.number()
-    .min(0)
+    .min(1)
     .max(10)
     .required(),
 
     totalVisitsReceived: Joi.number()
-    .min(0)
+    .integer()
+    .min(1)
     .max(999999999999999)
     .required(),
 
@@ -42,6 +43,5 @@ export const TuristSpotSchema = Joi.object({
     .pattern(/^\d{5}-\d{3}$/)
     .required(),
 
-  
 }).unknown(false);
   

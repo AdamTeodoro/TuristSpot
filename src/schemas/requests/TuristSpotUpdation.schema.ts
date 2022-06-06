@@ -7,12 +7,12 @@ export const TuristSpotUpdationSchema = Joi.object({
   
     headers: HeaderSchema.required(),
 
-    query: {
+    query: Joi.object({
         idTuristSpot: Joi.number()
-        .min(0)
-        .max(999999999999)
+        .min(1)
+        .max(9999999999999)
         .required()
-    },
+    }),
 
     body: Joi.object({
         turistSpot: TuristSpotSchema.required(),

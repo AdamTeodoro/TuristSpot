@@ -3,9 +3,9 @@ import { TuristSpotFindSchema } from "../schemas/requests/TuristSpotFind.schema"
 
 type Request = {
     query: {
-
+        
     }
-}
+};
 
 export const validateTuristSpotFindMiddleware = (req: Request, res: Response, next: NextFunction) => {
     try {

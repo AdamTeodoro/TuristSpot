@@ -2,8 +2,6 @@ import { NextFunction, Response } from "express";
 
 import { RatingCreationSchema } from "../schemas/requests/RatingCreation.schema";
 
-import { turistSpotService } from "../services/TuristSpotService";
-
 type Request = {
     query: {
         idTuristSpot: number

@@ -24,8 +24,10 @@ export const validateAdminMiddleware = async (req: Request, res: Response, next:
             return;
         }
     } catch {
+        console.log("validateAdminMiddleware");
         res.status(500)
         .json({ code: 'unknow-error' })
         .end();
+        return;
     }
 }

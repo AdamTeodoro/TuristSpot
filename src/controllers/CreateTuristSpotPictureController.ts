@@ -15,12 +15,11 @@ type Request = {
 export async function CreateTuristSpotPicturesController(req: Request, res: Response) {
     try {
         const { originalname, filename } = req.file;
-        const idUser: number = req.idUser as number;
         const idPicture = req.idPicture as number;
         //update add filds originalname and filename from store the file type
         const refTuristSpotPicture = await turistSpotPictureService.findByPk(idPicture);
         if (refTuristSpotPicture) {
-            const turistSpotPicturesUpdated = await refTuristSpotPicture.update({
+            const turistSpotPictureUpdated = await refTuristSpotPicture.update({
                 originalname,
                 filename
             });
@@ -28,7 +27,7 @@ export async function CreateTuristSpotPicturesController(req: Request, res: Resp
             res.status(200)
             .json({
                 code: 'success-to-create-turistspot-picture',
-                turistSpotPicturesUpdated
+                turistSpotPictureUpdated
             })
             .end();
             return;

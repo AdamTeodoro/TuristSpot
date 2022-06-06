@@ -12,9 +12,9 @@ type Request = {
         authorization?: string
     },
     idUser?: number
-}
+};
 
-export const PermissionCreationController = async (req: Request, res: Response) => {
+export const CreationPermissionController = async (req: Request, res: Response) => {
     try {
         //generate token
         const pass = hashService.generateHash(32);

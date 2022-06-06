@@ -1,6 +1,5 @@
-
-
 import { Sequelize } from 'sequelize';
+
 import { environmentService } from '../services/EnvironmentService';
 
 const {

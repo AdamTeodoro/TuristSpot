@@ -16,6 +16,7 @@ type Request = {
         }
     },
 };
+
 export const validateUserUpdationMiddleware = (req: Request, res: Response, next: NextFunction) => {
     try {
         if (UserUpdationSchema.validate(req).error) {

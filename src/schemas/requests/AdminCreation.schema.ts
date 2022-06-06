@@ -9,8 +9,9 @@ export const AdminCreationSchema = Joi.object({
     query: Joi.object({
 
         idPermission: Joi.number()
-        .min(0)
-        .max(999999999999)
+        .integer()
+        .min(1)
+        .max(9999999999999)
 
     }).unknown(false),
 

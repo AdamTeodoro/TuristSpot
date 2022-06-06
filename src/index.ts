@@ -3,6 +3,7 @@ import 'reflect-metadata';
 import express from 'express';
 
 import { resolve } from 'path';
+
 import { adminRoute } from './routes/admin.route';
 import { publicRoute } from './routes/public.route';
 import { userRoute } from './routes/user.route';

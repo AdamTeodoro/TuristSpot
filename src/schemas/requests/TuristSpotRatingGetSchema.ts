@@ -1,9 +1,10 @@
 import Joi from "joi";
 
-export const GetTuristSpotRatingSchema = Joi.object({
+export const TuristSpotRatingGetSchema = Joi.object({
     query: Joi.object({
         idTuristSpot: Joi.number()
-        .min(0)
+        .integer()
+        .min(1)
         .max(9999999999999)
         .required(),
         

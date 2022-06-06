@@ -1,5 +1,4 @@
 import { Response } from "express";
-
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
@@ -24,7 +23,7 @@ export const LoginController = async (req: Request, res: Response) => {
         //get user by email
         const foundUser = await userService.findOne({
             where: {
-                id: email
+                email
             }
         });
         //if user not found reject request access
@@ -84,7 +83,8 @@ export const LoginController = async (req: Request, res: Response) => {
         })
         .end();
         return;
-    } catch {
+    } catch(error) {
+        console.log("Login Controller Error: ", error);
         res.status(500)
         .json({ code:'unknow-error' })
         .end();

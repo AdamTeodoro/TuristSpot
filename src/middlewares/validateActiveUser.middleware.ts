@@ -13,7 +13,9 @@ type Request = {
 
 export const validateInactiveUserMiddleware = async (req: Request, res: Response, next: NextFunction) => {
     const idUser = req.idUser as number;
+    //find user by primary key
     const simpleUser = await simpleUserService.findByPk(idUser);
+    //verify if user exists and user active
     if (simpleUser && simpleUser.isActive) {
         req.isActive = simpleUser.isActive;
         next();

@@ -13,7 +13,8 @@ export const validateTuristSpotPictureDeletionMiddleware = (req: Request, res: R
             next();
             return;
         }
-    } catch {
+    } catch(error) {
+        console.log(error);
         res.status(500)
         .json({ code: 'internal-server-error' })
         .end();

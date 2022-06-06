@@ -13,7 +13,7 @@ type Request = {
     }
 }
 
-export async function UserRegisterController(req: Request, res: Response) {
+export async function RegisterUserController(req: Request, res: Response) {
     try {
         const { password, user } = req.body;
         //create User

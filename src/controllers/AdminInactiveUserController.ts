@@ -1,6 +1,6 @@
 import { NextFunction, Response } from "express";
 
-import { SimpleUserModel, simpleUserService } from "../services/SimpleUserService";
+import { simpleUserService } from "../services/SimpleUserService";
 
 type Request = {
     headers: {
@@ -9,7 +9,7 @@ type Request = {
     query: {
         idSimpleUser?: number;
     },
-}
+};
 
 export const AdminInactivateUserController = async (req: Request, res: Response, next: NextFunction) => {
     try {

@@ -1,5 +1,4 @@
 
-
 <h1>Projeto 6</h1>
 
 <p>https://github.com/nodejsbrasil/nodeteam/blob/main/projetos/projeto-6.md</p>
@@ -39,6 +38,8 @@ USUÁRIO ADMINISTRADOR
     - Fazer login ✔️
     - Atualizar perfil ✔️
     - Criar ponto turístico ✔️
+        - Criar imagem do ponto turístico
+        - Apagar imagem do ponto turístico
     - Alterar ponto turístico ✔️
     - Inativar ponto turístico ✔️
     - Remover avaliação do usuário ✔️
@@ -48,6 +49,9 @@ USUÁRIO ADMINISTRADOR
 
 USUÁRIO COMUM
     - Criar avaliação do ponto turístico ✔️
+        - Criar avaliação ✔️
+        - Add imagens da avaliação ✔️
+        - Apagar imagens da avaliação ✔️
     - Registrar ✔️
     - Fazer login ✔️
     - Atualizar perfil ✔️
@@ -55,15 +59,15 @@ USUÁRIO COMUM
 
 PONTO TURÍSTICO
     - Atualizar a média de avaliações de acordo com a nota dada pelo usuário ✔️
-
+    
 </br>
 
 PÚBLICO
-    - listagem de pontos turísticos se estiver ativo ✔️
-    - listagem das avaliações de um ponto turístico ✔️
-    - buscar ponto turístico pelo cep, endereço, cidade e estado ✔️
+    - Listagem de pontos turísticos se estiver ativo ✔️
+    - Listagem das avaliações de um ponto turístico ✔️
+    - Buscar ponto turístico pelo cep, endereço, cidade e estado ✔️
 
 </br>
 
 DOCUMENTAÇÃO
-    - fazer a documentação da api com swagger ❌
+    - Fazer a documentação da api com swagger ❌
