@@ -9,12 +9,19 @@ export type UserModel = typeof Model & {
 }
 
 export type UserData = {
+    email: string;
     userName: string;
     fullName: string;
 };
 
 function build(sequelize: Sequelize) {
+
     return sequelize.define("User", {
+        email: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: true,
+        },
         userName: {
             type: DataTypes.STRING,
             allowNull: false,

@@ -9,14 +9,13 @@ import { keyService } from "../services/KeyService";
 type Request = {
     body: {
         user: UserData,
-        email: string,
         password: string
     }
 }
 
 export async function RegisterUserController(req: Request, res: Response) {
     try {
-        const { password, user, email } = req.body;
+        const { password, user } = req.body;
         //create User
         const userCreated: IUser = await userService.create(user);
         await simpleUserService.create({
@@ -26,7 +25,6 @@ export async function RegisterUserController(req: Request, res: Response) {
         //create User Key
         await keyService.create({
             id: userCreated.id,
-            email: email,
             passwordHash: password
         });
         //send user created
@@ -35,7 +33,7 @@ export async function RegisterUserController(req: Request, res: Response) {
         .end();
         return;
     } catch(error) {
-        console.log(error);
+        console.log("Falha ao criar usuário");
         res.status(500)
         .json({ code: 'unknow-error' })
         .end();

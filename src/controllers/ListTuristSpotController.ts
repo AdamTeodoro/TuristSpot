@@ -9,7 +9,7 @@ type Request = {
     }
 }
 
-export const TuristSpotListController = async (req: Request, res: Response, next: NextFunction) => {
+export const ListTuristSpotController = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const lastTuristSpot = req.query.lastTuristSpot;
         let turistSpotList = [];

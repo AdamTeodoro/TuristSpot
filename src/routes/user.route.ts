@@ -8,7 +8,7 @@ import { CreateRatingPictureController } from "../controllers/CreateRatingPictur
 import { UpdateUserController } from "../controllers/UpdateUserController";
 import { RegisterUserController } from "../controllers/RegisterUserController";
 
-import { validateInactiveUserMiddleware } from "../middlewares/validateActiveUser.middleware";
+import { validateActiveUserMiddleware } from "../middlewares/validateActiveUser.middleware";
 import { validateAuthMiddleware } from "../middlewares/validateAuth.middleware";
 import { validateRatingCreationMiddleware } from "../middlewares/validateRatingCreation.middleware";
 import { validateRatingPicture } from "../middlewares/validateRatingPicture.middleware";
@@ -30,7 +30,7 @@ userRoute.put(
     '/user/update',
     validateUserUpdationMiddleware,
     validateAuthMiddleware,
-    validateInactiveUserMiddleware,
+    validateActiveUserMiddleware,
     UpdateUserController
 );
 
@@ -38,7 +38,7 @@ userRoute.post(
     '/user/rating/create',
     validateRatingCreationMiddleware,
     validateAuthMiddleware,
-    validateInactiveUserMiddleware,
+    validateActiveUserMiddleware,
     CreateRatingController,
 );
 
@@ -46,7 +46,7 @@ userRoute.post(
     'user/ratingPicture/create',
     validateRatingPictureCreationMiddleware,
     validateAuthMiddleware,
-    validateInactiveUserMiddleware,
+    validateActiveUserMiddleware,
     validateRatingPicture,
     multer(multerConfig).single('image'),
     CreateRatingPictureController,
@@ -56,7 +56,7 @@ userRoute.delete(
     'user/ratingPicture/delete',
     validateRatingPictureCreationMiddleware,
     validateAuthMiddleware,
-    validateInactiveUserMiddleware,
+    validateActiveUserMiddleware,
     validateRatingPicture,
     multer(multerConfig).single('image'),
     CreateRatingPictureController,

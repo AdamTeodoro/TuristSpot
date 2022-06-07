@@ -1,5 +1,7 @@
 import { NextFunction, Response } from "express";
 
+import { keyService } from "../services/KeyService";
+
 import { UserData, userService } from "../services/UserService";
 
 type Request = {
@@ -9,25 +11,33 @@ type Request = {
     },
     body: {
         user: UserData,
-        email: string,
         password: string
     }
-}
+};
 
 export const validateEmailExistsMiddleware = async (req: Request, res: Response, next: NextFunction) => {
-    //verify if user email exists
-    const email = req.body.email;
-    const foundUser = await userService.findOne({ 
-        where: {
-            id: email
+    try {
+        //verify if user email exists
+        const  { user } = req.body;
+        const refUser = await userService.findOne({ 
+            where: {
+                email: user.email
+            }
+        });
+        //if email exists return error
+        if (refUser) {
+            res.status(403)
+            .json({ code: 'email-already-registered' })
+            .end();
+            return;
         }
-    });
-    if (foundUser) {
-        res.status(403)
-        .json({ code: 'email-already-registered' })
+        next();
+        return;
+    } catch(error) {
+        console.log('falha ao validar e-mail', error);
+        res.status(500)
+        .json({ code: 'unknow-error' })
         .end();
         return;
-    } else {
-        next();
     }
 }

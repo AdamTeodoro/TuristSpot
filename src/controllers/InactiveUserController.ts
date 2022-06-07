@@ -3,7 +3,9 @@ import { Response } from "express";
 import { IUser } from "../interfaces/IUser";
 
 import { adminService } from "../services/AdminService";
+
 import { keyService } from "../services/KeyService";
+
 import { UserData, userService } from "../services/UserService";
 
 type Request = {
@@ -26,7 +28,6 @@ export async function InactiveUserController(req: Request, res: Response) {
         //create User Key
         await keyService.create({
             id: userCreated.id,
-            email: userCreated.email,
             passwordHash: password
         });
         //send response with Admin created

@@ -17,7 +17,6 @@ type Request = {
             newPassword?: string,
             oldPassword: string
         },
-        email: string
     }
     idUser?: number,
     isActive?: boolean,
@@ -25,9 +24,9 @@ type Request = {
 
 export async function UpdateUserController(req: Request, res: Response) {
     try {
-        const { user, pass, email } = req.body
+        const { user, pass } = req.body
         const idUser = req.idUser as number;
-        //get user founded key
+        //get key by id user
         const refKey = await keyService.findByPk(idUser) as IKey;
         //verify if user password is valid
         const isValidPassword = await bcrypt.compare(pass.oldPassword, refKey.passwordHash);
@@ -37,21 +36,14 @@ export async function UpdateUserController(req: Request, res: Response) {
             .end();
             return;
         }
-        //update user
+        //update user data
         const refUser = await userService.findByPk(idUser) as IUser;
         await refUser.update(user);
-        //get is Updating email
-        const isUpdatingEmail = refKey.email !== email;
-        //verify if user are updating email or password
-        if (
-            isUpdatingEmail ||
-            pass.newPassword
-        ) {
-            //update email and passoword if user ar updating password
+        //verify if user are updating password
+        if (pass.newPassword) {
             await refKey.update({
                 id: idUser,
-                email: email,
-                passwordHash: pass.newPassword? pass.newPassword: pass.oldPassword
+                passwordHash: pass.newPassword
             });
         }
         //send user created

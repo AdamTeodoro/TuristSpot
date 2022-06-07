@@ -11,7 +11,7 @@ type Request = {
     },
 };
 
-export const AdminInactivateUserController = async (req: Request, res: Response, next: NextFunction) => {
+export const InactiveAdminUserController = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const idSimpleUser = req.query.idSimpleUser as number;
         //verify if simpleUser exists

@@ -20,11 +20,11 @@ export const validateUserCreationMiddleware = (req: Request, res: Response, next
             })
             .end();
             return;
-        } else {
-            next();
-            return;
         }
-    } catch {
+        next();
+        return;
+    } catch (error) {
+        console.log("falha ao validar usuário", error);
         res.status(500)
         .json({ code: 'internal-server-error' })
         .end();

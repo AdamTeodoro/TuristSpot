@@ -2,7 +2,7 @@ import { Router } from "express";
 
 import { LoginController } from "../controllers/LoginController";
 import { FindTuristSpotController } from "../controllers/FindTuristSpotController";
-import { TuristSpotListController } from "../controllers/TuristSpotListController";
+import { ListTuristSpotController } from "../controllers/ListTuristSpotController";
 
 import { validateLoginMiddleware } from "../middlewares/validateLogin.middleware";
 import { validateTuristSpotListMiddleware } from "../middlewares/validateTuristspot.middleware";
@@ -19,13 +19,7 @@ publicRoute.post(
 publicRoute.get(
     '/turistspot/list',
     validateTuristSpotListMiddleware,
-    TuristSpotListController
-);
-
-publicRoute.get(
-    '/turistspot/list',
-    validateTuristSpotListMiddleware,
-    TuristSpotListController
+    ListTuristSpotController
 );
 
 publicRoute.get(

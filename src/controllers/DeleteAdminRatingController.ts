@@ -16,7 +16,7 @@ type Request = {
     }
 }
 
-export const AdminRatingDeletionController = async (req: Request, res: Response, next: NextFunction) => {
+export const DeleteAdminRatingController = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const idRating = req.query.idRating as number;
         //get rating to calculate turistspot average
