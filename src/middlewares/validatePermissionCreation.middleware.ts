@@ -10,6 +10,7 @@ type Request = {
 
 export const validatePermissionCreationMiddleware = (req: Request, res: Response, next: NextFunction) => {
     try {
+        console.log(PermissionCreationSchema.validate(req).error);
         if (PermissionCreationSchema.validate(req).error) {
             res.status(400)
             .json({ code: 'invalid-request-data' })

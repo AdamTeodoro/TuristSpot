@@ -9,8 +9,8 @@ class HashService {
 
     generateHash(lengthOfHash: number) {
         var hash = '';
-        length = length || 6;
-        for (var i = 0; i < length; i++) {
+        lengthOfHash = lengthOfHash;
+        for (var i = 0; i < lengthOfHash; i++) {
             hash += this.chars.charAt(Math.floor(Math.random() * this.chars.length));
         }
         return hash;

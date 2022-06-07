@@ -5,8 +5,10 @@ import { permissionService } from "../services/PermissionService";
 import { UserData } from "../services/UserService";
 
 type Request = {
-    query: {
+    headers: {
         authorization?: string,
+    }
+    query: {
         idPermission: number,
     },
     body: {
@@ -18,7 +20,7 @@ type Request = {
 export const validateAdminPermissionMiddleware = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { idPermission } = req.query;
-        const authorization = req.query.authorization as string;
+        const authorization = req.headers.authorization as string;
         //get permission
         const refPermission = await permissionService.findByPk(idPermission);
         //verify with jwt if authorization is valid
