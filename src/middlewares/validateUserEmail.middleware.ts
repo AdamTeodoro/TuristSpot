@@ -6,19 +6,20 @@ type Request = {
     query: {
         idPermission: number,
         authorization?: string,
-    }
+    },
     body: {
         user: UserData,
+        email: string,
         password: string
     }
 }
 
 export const validateEmailExistsMiddleware = async (req: Request, res: Response, next: NextFunction) => {
     //verify if user email exists
-    const user = req.body.user;
+    const email = req.body.email;
     const foundUser = await userService.findOne({ 
         where: {
-            id: user.email
+            id: email
         }
     });
     if (foundUser) {

@@ -6,6 +6,7 @@ import bcrypt from 'bcrypt';
 import { IKey } from "../interfaces/IKey";
 
 import { keyService } from "../services/KeyService";
+
 import { UserData, userService } from "../services/UserService";
 import { IUser } from "../interfaces/IUser";
 
@@ -15,7 +16,8 @@ type Request = {
         pass: {
             newPassword?: string,
             oldPassword: string
-        }
+        },
+        email: string
     }
     idUser?: number,
     isActive?: boolean,
@@ -23,7 +25,7 @@ type Request = {
 
 export async function UpdateUserController(req: Request, res: Response) {
     try {
-        const { user, pass } = req.body
+        const { user, pass, email } = req.body
         const idUser = req.idUser as number;
         //get user founded key
         const refKey = await keyService.findByPk(idUser) as IKey;
@@ -37,9 +39,9 @@ export async function UpdateUserController(req: Request, res: Response) {
         }
         //update user
         const refUser = await userService.findByPk(idUser) as IUser;
-        const updatedUser = await refUser.update(user);
+        await refUser.update(user);
         //get is Updating email
-        const isUpdatingEmail = refKey.email !== user.email;
+        const isUpdatingEmail = refKey.email !== email;
         //verify if user are updating email or password
         if (
             isUpdatingEmail ||
@@ -48,7 +50,7 @@ export async function UpdateUserController(req: Request, res: Response) {
             //update email and passoword if user ar updating password
             await refKey.update({
                 id: idUser,
-                email: updatedUser.email,
+                email: email,
                 passwordHash: pass.newPassword? pass.newPassword: pass.oldPassword
             });
         }
@@ -59,8 +61,8 @@ export async function UpdateUserController(req: Request, res: Response) {
         return;
     } catch(error) {
         console.log(error);
-        res.status(400)
-        .json({ code: 'fail-to-create-user' })
+        res.status(500)
+        .json({ code: 'unknow-error' })
         .end();
         return;
     }

@@ -3,7 +3,10 @@ import { TuristSpotFindSchema } from "../schemas/requests/TuristSpotFind.schema"
 
 type Request = {
     query: {
-        
+        postalCode?: string,
+        street?: string,
+        city?: string,
+        state?: string,
     }
 };
 

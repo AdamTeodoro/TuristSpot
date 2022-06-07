@@ -6,7 +6,7 @@ import { TuristSpotData } from "../services/TuristSpotService";
 type Request = {
     query: {
         idTuristSpot: number,
-    }
+    },
     body: {
         turistSpot: TuristSpotData
     },

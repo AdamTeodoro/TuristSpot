@@ -12,21 +12,22 @@ type Request = {
         idPermission: number;
     },
     body: {
-        user: UserData
+        user: UserData,
+        email: string,
         password: string
     }
 };
 
 export async function AdminRegisterController(req: Request, res: Response) {
     try {
-        const { password, user } = req.body;
+        const { password, user, email } = req.body;
         //create User
         const userCreated: IUser = await userService.create(user);
         await adminService.create({ id: userCreated.id });
         //create User Key
         await keyService.create({
             id: userCreated.id,
-            email: userCreated.email,
+            email: email,
             passwordHash: password
         });
         //send response with Admin created

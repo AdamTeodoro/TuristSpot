@@ -8,7 +8,7 @@ type Request = {
     query: {
         authorization?: string,
         idPermission: number,
-    }
+    },
     body: {
         user: UserData,
         password: string

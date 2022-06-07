@@ -35,7 +35,7 @@ Objetivos
 ## Requisitos:
 USUÁRIO ADMINISTRADOR
     - Registrar ✔️
-    - Fazer login ✔️
+    - Fazer login ✅
     - Atualizar perfil ✔️
     - Criar ponto turístico ✔️
         - Criar imagem do ponto turístico
@@ -53,7 +53,7 @@ USUÁRIO COMUM
         - Add imagens da avaliação ✔️
         - Apagar imagens da avaliação ✔️
     - Registrar ✔️
-    - Fazer login ✔️
+    - Fazer login ✅
     - Atualizar perfil ✔️
 </br>
 

@@ -5,7 +5,7 @@ import { turistSpotPictureService } from "../services/TuristSpotPictureService";
 type Request = {
     query: {
         idTuristSpot?: number
-    }
+    },
     idUser?: number,
     imgTable?: string,
     idPicture?: number,

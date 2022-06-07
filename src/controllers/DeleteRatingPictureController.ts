@@ -4,6 +4,8 @@ import fs from "fs";
 import { promisify } from "util";
 
 import { ratingPictureService } from "../services/RatingPictureService";
+import { ratingService } from "../services/RatingService";
+import { IRating } from "../interfaces/IRating";
 
 
 type Request = {
@@ -41,6 +43,11 @@ export const DeleteRatingPictureController = async (req: Request, res: Response)
         await unlink(filePath);
         //delete database object representation
         await refPicture.destroy();
+        //decrease qtd rating
+        const refRating = await ratingService.findByPk(refPicture.idRating) as IRating;
+        await refRating.update({
+            qtdImg: refRating.qtdImg--            
+        });
         //res the success mensage
         res.status(200)
         .json({ code: 'success-to-delete-turistspot-picture' })

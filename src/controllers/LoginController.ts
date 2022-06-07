@@ -9,6 +9,7 @@ import { userService } from "../services/UserService";
 import { environmentService } from "../services/EnvironmentService";
 import { simpleUserService } from "../services/SimpleUserService";
 import { adminService } from "../services/AdminService";
+import { IUser } from "../interfaces/IUser";
 
 type Request = {
     body: {
@@ -21,26 +22,28 @@ export const LoginController = async (req: Request, res: Response) => {
     try {
         const { email, password } = req.body;
         //get user by email
-        const foundUser = await userService.findOne({
+        const refKey = await keyService.findOne({
             where: {
                 email
             }
         });
         //if user not found reject request access
-        if (!foundUser) {
+        if (!refKey) {
             res.status(400)
             .json({ code: 'invalid-credencials' })
             .end();
             return;
         }
-        //
-        const admin = await adminService.findByPk(foundUser.id);
+        //get user
+        const refUser = await userService.findByPk(refKey.id) as IUser;
+        //verify if user is admin
+        const refAdmin = await adminService.findByPk(refUser.id);
         //if is not admin, verify if user is actived
-        if (!admin) {
+        if (!refAdmin) {
             //verify if user is active
             const simpleUser = await simpleUserService.findOne({
                 where: {
-                    id: foundUser.id,
+                    id: refUser.id,
                     isActive: true
                 }
             });
@@ -52,7 +55,7 @@ export const LoginController = async (req: Request, res: Response) => {
             }
         }
         //get user founded key
-        const key = await keyService.findByPk(foundUser.id) as IKey;
+        const key = await keyService.findByPk(refUser.id) as IKey;
         //verify if user password is valid
         const isValidPassword = await bcrypt.compare(password, key.passwordHash);
         if (!isValidPassword) {
@@ -64,7 +67,7 @@ export const LoginController = async (req: Request, res: Response) => {
         //generate authorization token
         const _2days =  86400 * 2;
         const { JWT_SECRET } = environmentService.getEnvironmnet();
-        const authorization = jwt.sign({ id: foundUser.id }, JWT_SECRET, {
+        const authorization = jwt.sign({ id: refUser.id }, JWT_SECRET, {
             expiresIn: _2days
         });
         //send user and authorization token
@@ -72,12 +75,12 @@ export const LoginController = async (req: Request, res: Response) => {
         .json({
             code: 'success-to-login',
             user: {
-                id: foundUser.id,
-                userName: foundUser.userName,
-                fullname: foundUser.fullName,
-                email: foundUser.email,
-                createdAt: foundUser.createdAt,
-                updatedAt: foundUser.updatedAt         
+                id: refUser.id,
+                userName: refUser.userName,
+                fullname: refUser.fullName,
+                email: refKey.email,
+                createdAt: refUser.createdAt,
+                updatedAt: refUser.updatedAt         
             },
             authorization
         })

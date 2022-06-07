@@ -4,7 +4,7 @@ import { AdminRatingDeletionSchema } from "../schemas/requests/AdminRatingDeleti
 type Request = {
     headers: {
         authorization?: string
-    }
+    },
     query: {
         idRating?: number
     }
