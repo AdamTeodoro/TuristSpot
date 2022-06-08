@@ -5,9 +5,9 @@ import { TuristSpotData, turistSpotService } from "../services/TuristSpotService
 type Request = {
     query: {
         idTuristSpot: number,
-    }
+    },
     body: {
-        turistSpot: TuristSpotData
+        turistSpot: Partial<TuristSpotData>
     },
     idUser?: number,
 };
@@ -22,10 +22,9 @@ export async function UpdateTuristSpotController(req: Request, res: Response) {
         if (refTuristSpot) {
             const turistSpotUpdated = await refTuristSpot.update({
                 idAdmin: idUser,
-                isActive: true,
-                average: turistSpot.average,
+                isActive: turistSpot.isActive,
                 city: turistSpot.city,
-                history: turistSpot.city,
+                history: turistSpot.history,
                 postalCode: turistSpot.postalCode,
                 state: turistSpot.state,
                 street: turistSpot.street,
@@ -34,7 +33,7 @@ export async function UpdateTuristSpotController(req: Request, res: Response) {
             //send turist spot
             res.status(200)
             .json({
-                code: 'success-to-create-turist-spot',
+                code: 'success-to-update-turist-spot',
                 turistSpotUpdated
             })
             .end();
@@ -46,7 +45,7 @@ export async function UpdateTuristSpotController(req: Request, res: Response) {
             return;
         }
     } catch(error) {
-        console.log(error)
+        console.log('onUpdateTuristControllerError', error)
         res.status(500)
         .json({ code: 'unknow-error' })
         .end();

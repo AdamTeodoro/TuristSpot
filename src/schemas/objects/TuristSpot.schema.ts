@@ -2,11 +2,6 @@ import Joi from "joi";
 
 export const TuristSpotSchema = Joi.object({
 
-    average: Joi.number()
-    .min(1)
-    .max(10)
-    .required(),
-
     totalVisitsReceived: Joi.number()
     .integer()
     .min(1)
@@ -19,6 +14,8 @@ export const TuristSpotSchema = Joi.object({
     .trim()
     .required(),
     
+    isActive: Joi.boolean(),
+
     state: Joi.string()
     .min(3)
     .max(256)

@@ -37,11 +37,11 @@ USUÁRIO ADMINISTRADOR
     - Registrar ✅
     - Fazer login ✅
     - Atualizar perfil ✅
-    - Criar ponto turístico ✔️
-        - Criar imagem do ponto turístico ✔️
-        - Apagar imagem do ponto turístico✔️
-    - Alterar ponto turístico ✔️
-    - Inativar ponto turístico ✔️
+    - Criar ponto turístico✅
+        - Criar imagem do ponto turístico ✅
+        - Apagar imagem do ponto turístico✅
+    - Alterar ponto turístico ✅
+    - Inativar ponto turístico ✅
     - Remover avaliação do usuário ✔️
     - Inativar usuários ✔️
     - Criar permissão de cadastro de admin ✅

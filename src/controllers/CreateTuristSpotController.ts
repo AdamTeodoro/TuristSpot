@@ -19,7 +19,7 @@ export async function CreateTuristSpotController(req: Request, res: Response) {
         const turistSpotCreated: TuristSpotData = await turistSpotService.create({
             idAdmin: idUser,
             isActive: true,
-            average: turistSpot.average,
+            average: -1,
             city: turistSpot.city,
             history: turistSpot.city,
             postalCode: turistSpot.postalCode,
