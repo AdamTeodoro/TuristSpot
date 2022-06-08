@@ -1,7 +1,5 @@
 import { NextFunction, Response } from "express";
 
-import { keyService } from "../services/KeyService";
-
 import { UserData, userService } from "../services/UserService";
 
 type Request = {

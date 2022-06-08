@@ -1,7 +1,5 @@
 import { Response } from "express";
 
-import { IRatingPicture } from "../interfaces/IRatingPicture";
-
 import { ratingPictureService } from "../services/RatingPictureService";
 
 type Request = {

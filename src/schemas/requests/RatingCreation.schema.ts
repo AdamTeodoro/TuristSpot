@@ -13,7 +13,7 @@ export const RatingCreationSchema = Joi.object({
         .required()
     }).required(),
 
-    body: Joi.object({
+    body: {
         rating: Joi.object({
             commentary: Joi.string()
             .min(3)
@@ -21,10 +21,10 @@ export const RatingCreationSchema = Joi.object({
             .required(),
 
             rating: Joi.number()
-            .min(1)
+            .min(0)
             .max(10)
             .required()
         }).required()
-    }).required()
+    }
 
 }).unknown(true);

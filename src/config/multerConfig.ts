@@ -23,12 +23,12 @@ export default {
     },
     storage: multer.diskStorage({
         //return the call back with the path from folder of file
-        destination: (req: any, file, cb) => {
+        destination: (req: any, file: any, cb) => {
             const fullPath = 'images/' + req.imgTable + "/";
             cb(null, resolve(__dirname, '..', '..', fullPath))
         },
         //return the call back with de filne name
-        filename: (req: any, file, cb) => {
+        filename: (req: any, file: any, cb) => {
             cb(null, `${req.idPicture}${extname(file.originalname)}`);
         }
     })

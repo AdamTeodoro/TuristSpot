@@ -4,7 +4,7 @@ import { BuildOptions, DataTypes, Model, Sequelize} from 'sequelize';
 import { iTuristSpotPicture } from '../interfaces/ITuristSpotPicture';
 
 import { db } from '../database/database';
-import config from '../config/config';
+
 import { environmentService } from './EnvironmentService';
 
 export type TuristSpotPictureModel = typeof Model & {

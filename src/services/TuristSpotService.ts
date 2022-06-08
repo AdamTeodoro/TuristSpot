@@ -1,4 +1,4 @@
-import { BuildOptions, DataTypes, Model, Sequelize, where} from 'sequelize';
+import { BuildOptions, DataTypes, Model, Sequelize } from 'sequelize';
 
 import { ITuristSpot } from '../interfaces/ITuristSpot';
 

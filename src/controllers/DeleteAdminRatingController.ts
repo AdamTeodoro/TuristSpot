@@ -3,8 +3,8 @@ import { NextFunction, Response } from "express";
 import { IRating } from "../interfaces/IRating";
 import { ITuristSpot } from "../interfaces/ITuristSpot";
 
-import { RatingModel, ratingService } from "../services/RatingService";
-import { TuristSpotModel, turistSpotService } from "../services/TuristSpotService";
+import { ratingService } from "../services/RatingService";
+import { turistSpotService } from "../services/TuristSpotService";
 
 
 type Request = {
