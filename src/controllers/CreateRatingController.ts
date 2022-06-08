@@ -20,13 +20,26 @@ export async function CreateRatingController(req: Request, res: Response) {
     try {
         const { rating } = req.body;
         const idUser: number = req.idUser as number;
-        const { idTuristSpot } = req.query;
+        const idTuristSpot = Number(req.query.idTuristSpot);
 
         //verify if turistspot id is valid
         const refturistSpot = await turistSpotService.findByPk(idTuristSpot)
         if (!refturistSpot) {
             res.status(400)
             .json({ code: 'invalid-turistspot-id' })
+            .end();
+            return;
+        }
+        //get rating user
+        const ratingUserExists = await turistSpotService.findOne({
+            where: {
+                idTuristSpot: idTuristSpot,
+                idSimpleUser: idUser,
+            }
+        });
+        if (ratingUserExists) {
+            res.status(400)
+            .json({ code: 'classification-already-exists' })
             .end();
             return;
         }
@@ -47,7 +60,7 @@ export async function CreateRatingController(req: Request, res: Response) {
         });
         //create rating
         const createdRating = await ratingService.create({
-            idTuristSpot: req.query.idTuristSpot,
+            idTuristSpot: idTuristSpot,
             idSimpleUser: idUser,
             rating: rating.rating,
             commentary: rating.commentary,
@@ -62,7 +75,7 @@ export async function CreateRatingController(req: Request, res: Response) {
         .end();
         return;
     } catch(error) {
-        console.log(error)
+        console.log('erro ao criar rating: ', error);
         res.status(500)
         .json({ code: 'unknow-error' })
         .end();

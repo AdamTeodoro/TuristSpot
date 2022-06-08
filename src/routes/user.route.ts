@@ -16,6 +16,7 @@ import { validateRatingPictureCreationMiddleware } from "../middlewares/validate
 import { validateUserCreationMiddleware } from "../middlewares/validateUserCreation.middleware";
 import { validateEmailExistsMiddleware } from "../middlewares/validateUserEmail.middleware";
 import { validateUserUpdationMiddleware } from "../middlewares/validateUserUpdation.middlware";
+import { UpdateRatingController } from "../controllers/UpdateRatingController";
 
 const userRoute = Router();
 
@@ -42,8 +43,16 @@ userRoute.post(
     CreateRatingController,
 );
 
+userRoute.put(
+    '/user/rating/update',
+    validateRatingCreationMiddleware,
+    validateAuthMiddleware,
+    validateActiveUserMiddleware,
+    UpdateRatingController
+)
+
 userRoute.post(
-    'user/ratingPicture/create',
+    '/user/ratingPicture/create',
     validateRatingPictureCreationMiddleware,
     validateAuthMiddleware,
     validateActiveUserMiddleware,
@@ -53,7 +62,7 @@ userRoute.post(
 );
 
 userRoute.delete(
-    'user/ratingPicture/delete',
+    '/user/ratingPicture/delete',
     validateRatingPictureCreationMiddleware,
     validateAuthMiddleware,
     validateActiveUserMiddleware,

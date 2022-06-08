@@ -22,6 +22,7 @@ function build(sequelize: Sequelize) {
             type: DataTypes.INTEGER,
             allowNull: false,
             primaryKey: true,
+            autoIncrement: true,
         },
         idSimpleUser: {
             type: DataTypes.INTEGER,

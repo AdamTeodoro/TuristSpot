@@ -27,7 +27,8 @@ export const validateRatingCreationMiddleware = async (req: Request, res: Respon
         }
         next();
         return;
-    } catch {
+    } catch(error) {
+        console.log("erro ao validar rating", error);
         res.status(500)
         .json({ code: 'internal-server-error' })
         .end();
