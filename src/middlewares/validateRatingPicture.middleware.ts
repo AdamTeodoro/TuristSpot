@@ -32,7 +32,7 @@ export const validateRatingPicture = async (
             return;
         }
         //verify if valid user authenticated
-        if (req.idUser === refRating.idSimpleUser) {
+        if (req.idUser !== refRating.idSimpleUser) {
             res.status(401)
             .json({ code: 'invalid-request-authorization' })
             .end();
@@ -45,18 +45,20 @@ export const validateRatingPicture = async (
             .end();
             return;
         }
-        refRating.qtdImg++;
-        await refRating.save();
         //create rating picture
         const refRatingPicture = await ratingPictureService.create({
             idRating,
-            idUser: req.idUser
+            idUser: req.idUser,
         });
+        //increment qtd img of rating picture
+        refRating.qtdImg++;
+        await refRating.save();
         //get rating picture to use in image
         req.idPicture = refRatingPicture.id;
         next();
         return;
-    } catch {
+    } catch(error) {
+        console.log(error);
         res.status(500)
         .json({ code: 'internal-server-error' })
         .end();

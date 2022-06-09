@@ -1,5 +1,7 @@
 import { Response } from "express";
+import { ITuristSpot } from "../interfaces/ITuristSpot";
 
+import { ratingService } from "../services/RatingService";
 import { turistSpotService } from "../services/TuristSpotService";
 
 type Request = {
@@ -21,26 +23,36 @@ export async function UpdateRatingController(req: Request, res: Response) {
         const idUser: number = req.idUser as number;
         const idTuristSpot = Number(req.query.idTuristSpot);
         //get rating user
-        const refRating = await turistSpotService.findOne({
+        const refRating = await ratingService.findOne({
             where: {
                 idTuristSpot: idTuristSpot,
                 idSimpleUser: idUser,
             }
         });
+        //verify if rating exits
         if (!refRating) {
             res.status(400)
-            .json({ code: 'classification-not-exists' })
+            .json({ code: 'rating-not-exists' })
             .end();
             return;
         }
-        //create rating
+        //get turistspot
+        const refTuristSpot = await turistSpotService.findByPk(idTuristSpot) as ITuristSpot;
+        //calculate new rating from turistspot
+        const sumAverage = (refTuristSpot.qtdRatings * refTuristSpot.average) - refTuristSpot.average;
+        const newSumAverage = sumAverage + rating.rating;
+        // update turist spot average
+        await refTuristSpot.update({
+            average: (newSumAverage / refTuristSpot.qtdRatings)
+        });
+        //update rating
         await refRating.update({
             rating: rating.rating,
             commentary: rating.commentary,
         });
         //send rating created
         res.status(200)
-        .json({ code: 'success-to-create-rating' })
+        .json({ code: 'success-to-update-rating' })
         .end();
         return;
     } catch(error) {

@@ -10,7 +10,7 @@ type Request = {
     idUser?: number,
     file?: any,
     idPicture?: number,
-}
+};
 
 export async function CreateTuristSpotPicturesController(req: Request, res: Response) {
     try {

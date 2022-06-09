@@ -14,14 +14,13 @@ type Request = {
         }
     },
     idUser?: number,
-}
+};
 
 export async function CreateRatingController(req: Request, res: Response) {
     try {
         const { rating } = req.body;
         const idUser: number = req.idUser as number;
         const idTuristSpot = Number(req.query.idTuristSpot);
-
         //verify if turistspot id is valid
         const refturistSpot = await turistSpotService.findByPk(idTuristSpot)
         if (!refturistSpot) {
@@ -30,16 +29,17 @@ export async function CreateRatingController(req: Request, res: Response) {
             .end();
             return;
         }
-        //get rating user
-        const ratingUserExists = await turistSpotService.findOne({
+        // get rating user
+        const ratingUserExists = await ratingService.findOne({
             where: {
                 idTuristSpot: idTuristSpot,
                 idSimpleUser: idUser,
             }
         });
+        // 
         if (ratingUserExists) {
             res.status(400)
-            .json({ code: 'classification-already-exists' })
+            .json({ code: 'rating-already-exists' })
             .end();
             return;
         }
@@ -54,7 +54,7 @@ export async function CreateRatingController(req: Request, res: Response) {
         }
         newQtdRating = refturistSpot.qtdRatings + 1;
         // update turist spot
-        refturistSpot.update({
+        await refturistSpot.update({
             qtdRatings: newQtdRating,
             average: (newSumAverage / newQtdRating)
         });

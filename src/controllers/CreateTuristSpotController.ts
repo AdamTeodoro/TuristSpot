@@ -7,8 +7,7 @@ type Request = {
         turistSpot: TuristSpotData
     },
     idUser?: number,
-}
-
+};
 export async function CreateTuristSpotController(req: Request, res: Response) {
     try {
         const idUser: number = req.idUser as number;

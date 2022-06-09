@@ -1,11 +1,9 @@
 import { Response } from "express";
-import path from "path";
-import fs from "fs";
-import { promisify } from "util";
 
 import { ratingPictureService } from "../services/RatingPictureService";
 import { ratingService } from "../services/RatingService";
 import { IRating } from "../interfaces/IRating";
+import { imgService } from "../services/ImgService";
 
 
 type Request = {
@@ -14,7 +12,8 @@ type Request = {
     },
     query: {
         idPicture?: number
-    }
+    },
+    idUser?: number
 };
 
 export const DeleteRatingPictureController = async (req: Request, res: Response) => {
@@ -22,25 +21,27 @@ export const DeleteRatingPictureController = async (req: Request, res: Response)
         const idPicture = req.query.idPicture;
         const refPicture = await ratingPictureService
         .findByPk(idPicture);
+        //verify if refPicture exits
         if (!refPicture) {
             res.status(400)
             .json({ code: 'invalid-request-data' })
             .end();
             return;
         }
+        //verify if is valid authorization
+        if (refPicture.idSimpleUser !== req.idUser) {
+            res.status(403)
+            .json({ code: 'invalid-authorization' })
+            .end();
+            return;
+        }
+        //get file
         const filename: string = refPicture.filename as string;
         //get flie path
-        const filePath = path.resolve(
-            __dirname,
-            "..",
-            "..",
-            "images", 
-            "ratingpictures",
-            filename
+        await imgService.deleteImg(
+            filename,
+            'RATINGPICTURES'
         );
-        const unlink = promisify(fs.unlink);
-        //delete picture file by path and if success delete in database
-        await unlink(filePath);
         //delete database object representation
         await refPicture.destroy();
         //decrease qtd rating

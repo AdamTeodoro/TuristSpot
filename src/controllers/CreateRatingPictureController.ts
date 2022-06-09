@@ -5,7 +5,7 @@ import { ratingPictureService } from "../services/RatingPictureService";
 type Request = {
     headers: {
         authorization?: string
-    }
+    },
     query: {
         idRating?: string
     },

@@ -1,73 +1,120 @@
 
 <h1>Projeto 6</h1>
 
-<p>https://github.com/nodejsbrasil/nodeteam/blob/main/projetos/projeto-6.md</p>
+<b>Esse repositório é referente a implementação do desafio 6 do NODE TEAM 1ª Edição.</b>
 
-<h3>Esse repositório é referente a implementação do desafio 6 do NODE TEAM 1ª Edição.</h3>
+<details>
+    <summary><h2>TECNOLOGIAS UTILIZADAS</h2></summary>
+    <b>
+        nodejs
+        typescript
+        sequelize
+        postgresql
+        jwt
+        bcrypt
+        joi
+        express
+        dotenv
+        multer
+    </b>
+</details>
 
-https://github.com/nodejsbrasil/nodeteam
 
-Para rodar o projeto, iniciar com "npm start" ou "yarn start" para iniciar o servidor na porta 3333.
+<details>
+    <summary><h2>INICIAR SERVIDOR</h2></summary>
+    <code>npm start</code>
+    ou 
+    <code>yarn start</code>
+</details>
 
-<b>Tecnologias utilizadas:</b>
-<h3>
-    nodejs
-    typescript
-    sequelize
-    postgresql
-    jwt
-    bcrypt
-    joi
-    express
-    dotenv
-    multer
-</h3>
+<details>
 
-Objetivos
+<summary><h2>MARCAÇÕES</h2></summary>
 
-**
 <b>
-    1 - Feito e testado: ✅
-    2 - Apenas feito: ✔️
-    3 - Não feito: ❌
+
+| Símbolo    | Significado        |
+| :--------: | :----------------: |
+|     ✅    |  Feito e testado    |
+|     ✔️    |  Apenas feito       |
+|     ❌    |  Não feito          |
 </b>
-**
-## Requisitos:
+
+</details>
+
+
+<details>
+    <summary><h2>REQUISITOS</h2></summary>
+
 USUÁRIO ADMINISTRADOR
-    - Registrar ✅
+
+    - Registrar ✅ 
+
     - Fazer login ✅
+
     - Atualizar perfil ✅
+
     - Criar ponto turístico✅
+
         - Criar imagem do ponto turístico ✅
+
         - Apagar imagem do ponto turístico✅
+
     - Alterar ponto turístico ✅
+
     - Inativar ponto turístico ✅
+
     - Remover avaliação do usuário ✔️
+
     - Inativar usuários ✔️
+
     - Criar permissão de cadastro de admin ✅
-</br>
+
 
 USUÁRIO COMUM
+
     - Criar avaliação do ponto turístico ✔️
-        - Criar avaliação ✔️
+
+        - Criar avaliação ✅
+
+        - Atualizar avaliação ✅
+
         - Add imagens da avaliação ✔️
+
         - Apagar imagens da avaliação ✔️
+
     - Registrar ✔️
+
     - Fazer login ✅
+
     - Atualizar perfil ✅
-</br>
+
 
 PONTO TURÍSTICO
+
     - Atualizar a média de avaliações de acordo com a nota dada pelo usuário ✔️
-    
-</br>
+
 
 PÚBLICO
+
     - Listagem de pontos turísticos se estiver ativo ✔️
+
     - Listagem das avaliações de um ponto turístico ✔️
+
     - Buscar ponto turístico pelo cep, endereço, cidade e estado ✔️
 
-</br>
 
 DOCUMENTAÇÃO
+
     - Fazer a documentação da api com swagger ❌
+</details>
+
+<details>
+    <summary><h2>Links</h2></summary>
+
+## NODE TEAM
+<p>https://github.com/nodejsbrasil/nodeteam</p>
+
+## PROJETO 6
+<p>https://github.com/nodejsbrasil/nodeteam/blob/main/projetos/projeto-6.md</p>
+</details>

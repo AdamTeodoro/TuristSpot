@@ -19,20 +19,12 @@ function build(sequelize: Sequelize) {
             primaryKey: true,
             autoIncrement: true
         },
-        idSimpleUser: {
+        idUser: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
                 key: 'id',
                 model: 'SimpleUser'
-            }
-        },
-        idTuristSpot: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                key: 'id',
-                model: 'TuristSpot'
             }
         },
         idRating: {
@@ -45,11 +37,11 @@ function build(sequelize: Sequelize) {
         },
         originalname: {
             type: STRING,
-            allowNull: false
+            allowNull: true
         },
         filename: {
             type: STRING,
-            allowNull: false
+            allowNull: true
         },
         imgUrl: {
             type: DataTypes.VIRTUAL
