@@ -23,6 +23,12 @@ publicRoute.get(
 );
 
 publicRoute.get(
+    '/rating/listByTuristSpot',
+    validateTuristSpotListMiddleware,
+    ListTuristSpotController
+);
+
+publicRoute.get(
     '/turistspot/find',
     validateTuristSpotFindMiddleware,
     FindTuristSpotController,

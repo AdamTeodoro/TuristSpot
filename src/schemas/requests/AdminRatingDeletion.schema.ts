@@ -13,4 +13,4 @@ export const AdminRatingDeletionSchema = Joi.object({
         .required()
     })
     
-});
+}).unknown(true);

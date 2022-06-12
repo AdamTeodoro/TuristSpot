@@ -3,7 +3,7 @@ import { Model } from "sequelize";
 export interface IRatingPicture extends Model {
     id: number;
     idRating: number;
-    idSimpleUser: number;
+    idUser: number;
     idTuristSpot: number;
     createdAt: Date;
     updatedAt: Date;

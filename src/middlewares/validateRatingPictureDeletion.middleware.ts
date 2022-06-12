@@ -13,6 +13,7 @@ type Request = {
 
 export const validateRatingPictureDeletionMiddleware = (req: Request, res: Response, next: NextFunction) => {
     try {
+        console.log('error: ', RatingPictureDeletionSchema.validate(req).error);
         if (RatingPictureDeletionSchema.validate(req).error) {
             res.status(400)
             .json({ code: 'invalid-request-data' })

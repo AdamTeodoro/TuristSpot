@@ -19,6 +19,10 @@ export const InactiveAdminUserController = async (req: Request, res: Response, n
         if (refSimpleUser) {
             //update simple user status
             await refSimpleUser.update({ isActive: false });
+            res.status(200)
+            .json({ code: 'success-to-inactive-user' })
+            .end();
+            return;
         } else {
             res.status(401)
             .json({ code: 'fail-to-inactive-user' })

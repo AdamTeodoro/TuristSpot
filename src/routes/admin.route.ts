@@ -113,7 +113,7 @@ adminRoute.put(
     validateAdminInactiveUserMiddleware,
     validateAuthMiddleware,
     validateAdminMiddleware,
-    InactiveAdminUserController,
+    InactiveAdminUserController
 );
 
 export { adminRoute };

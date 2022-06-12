@@ -24,7 +24,7 @@ function build(sequelize: Sequelize) {
             allowNull: false,
             references: {
                 key: 'id',
-                model: 'SimpleUser'
+                model: 'User'
             }
         },
         idRating: {

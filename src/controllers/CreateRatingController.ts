@@ -43,20 +43,24 @@ export async function CreateRatingController(req: Request, res: Response) {
             .end();
             return;
         }
-        let newSumAverage;
+        let newAverage;
         let newQtdRating;
         //calculate new rating from turistspot
         if (refturistSpot.average === -1) {
-            newSumAverage = rating.rating;
+            newAverage = rating.rating;
+            newQtdRating = 1;
         } else {
             const sumAverage = (refturistSpot.qtdRatings * refturistSpot.average);
-            newSumAverage = sumAverage + rating.rating;
+            console.log(sumAverage);
+            newQtdRating = refturistSpot.qtdRatings + 1;
+            console.log(newQtdRating)
+            newAverage = (sumAverage + rating.rating) / newQtdRating;
+            console.log(newAverage);
         }
-        newQtdRating = refturistSpot.qtdRatings + 1;
         // update turist spot
         await refturistSpot.update({
             qtdRatings: newQtdRating,
-            average: (newSumAverage / newQtdRating)
+            average: newAverage
         });
         //create rating
         const createdRating = await ratingService.create({

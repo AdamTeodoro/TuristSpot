@@ -6,16 +6,27 @@
 <details>
     <summary><h2>TECNOLOGIAS UTILIZADAS</h2></summary>
     <b>
-        nodejs
-        typescript
-        sequelize
-        postgresql
-        jwt
-        bcrypt
-        joi
-        express
-        dotenv
-        multer
+
+        nodejs;
+
+        typescript;
+
+        sequelize;
+
+        docker/postgresql;
+
+        jwt;
+
+        bcrypt;
+
+        joi;
+
+        express;
+
+        dotenv;
+
+        multer;
+
     </b>
 </details>
 
@@ -27,6 +38,7 @@
     <code>yarn start</code>
 </details>
 
+
 <details>
 
 <summary><h2>MARCAÇÕES</h2></summary>
@@ -34,8 +46,8 @@
 <b>
 
 | Símbolo    | Significado        |
-| :--------: | :----------------: |
-|     ✅    |  Feito e testado    |
+| :--------: | :-----------------: |
+|     ✅    |  Está funcionando   |
 |     ✔️    |  Apenas feito       |
 |     ❌    |  Não feito          |
 </b>
@@ -46,7 +58,7 @@
 <details>
     <summary><h2>REQUISITOS</h2></summary>
 
-USUÁRIO ADMINISTRADOR
+## USUÁRIO ADMINISTRADOR
 
     - Registrar ✅ 
 
@@ -64,38 +76,38 @@ USUÁRIO ADMINISTRADOR
 
     - Inativar ponto turístico ✅
 
-    - Remover avaliação do usuário ✔️
+    - Remover avaliação do usuário ✅
 
-    - Inativar usuários ✔️
+    - Inativar usuários ✅
 
     - Criar permissão de cadastro de admin ✅
 
 
-USUÁRIO COMUM
+## USUÁRIO COMUM
 
-    - Criar avaliação do ponto turístico ✔️
+    - Criar avaliação do ponto turístico ✅
 
         - Criar avaliação ✅
 
         - Atualizar avaliação ✅
 
-        - Add imagens da avaliação ✔️
+        - Add imagens da avaliação ✅
 
-        - Apagar imagens da avaliação ✔️
+        - Apagar imagens da avaliação ✅
 
-    - Registrar ✔️
+    - Registrar ✅
 
     - Fazer login ✅
 
     - Atualizar perfil ✅
 
 
-PONTO TURÍSTICO
+## PONTO TURÍSTICO
 
-    - Atualizar a média de avaliações de acordo com a nota dada pelo usuário ✔️
+    - Atualizar a média de avaliações de acordo com a nota dada pelo usuário ✅
 
 
-PÚBLICO
+## PÚBLICO
 
     - Listagem de pontos turísticos se estiver ativo ✔️
 
@@ -104,10 +116,12 @@ PÚBLICO
     - Buscar ponto turístico pelo cep, endereço, cidade e estado ✔️
 
 
-DOCUMENTAÇÃO
+## DOCUMENTAÇÃO
 
     - Fazer a documentação da api com swagger ❌
+
 </details>
+
 
 <details>
     <summary><h2>Links</h2></summary>

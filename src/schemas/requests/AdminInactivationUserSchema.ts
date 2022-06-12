@@ -5,7 +5,7 @@ import Joi from "joi";
 import { HeaderSchema } from "../objects/Header.schema";
 
 export const AdminInactivationSchema = Joi.object({
-    headers: HeaderSchema,
+    headers: HeaderSchema.required(),
 
     query: Joi.object({
         idSimpleUser: Joi.number()
@@ -14,4 +14,4 @@ export const AdminInactivationSchema = Joi.object({
         .max(9999999999999)
         .required()
     })
-});
+}).unknown(true)

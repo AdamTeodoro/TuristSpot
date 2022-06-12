@@ -12,7 +12,7 @@ import { turistSpotService } from "../services/TuristSpotService";
 type Request = {
     headers: {
         authorization?: string
-    }
+    },
     query: {
         idRating?: number
     }
@@ -37,7 +37,7 @@ export const DeleteAdminRatingController = async (req: Request, res: Response, n
         //get pictures
         const arrayRatingPictures = await ratingPictureService.findAll({
             where: {
-                idTuristSpot: refTuristspot.id
+                idRating: refRating.id
             }            
         });
         //delete all images

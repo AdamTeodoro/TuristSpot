@@ -11,6 +11,7 @@ type Request = {
         password: string
     }
 }
+
 export const validateUserCreationMiddleware = (req: Request, res: Response, next: NextFunction) => {
     try {
         if (UserCreationSchema.validate(req).error) {

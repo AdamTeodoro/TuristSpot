@@ -10,7 +10,7 @@ type Request = {
     imgTable?: string,
     idPicture?: number,
     idItem?: number,
-}
+};
 
 export const validateTuristSpotPictureMiddleware = async (req: Request, res: Response, next: NextFunction) => {
     try {
