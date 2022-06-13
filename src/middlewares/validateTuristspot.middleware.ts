@@ -4,7 +4,7 @@ import { TuristSpotListSchema } from "../schemas/requests/TuristSpotList.schema"
 
 type Request = {
     query: {
-        lastTuristSpot: Date
+        lastTuristSpot?: number
     }
 };
 

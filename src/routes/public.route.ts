@@ -3,10 +3,12 @@ import { Router } from "express";
 import { LoginController } from "../controllers/LoginController";
 import { FindTuristSpotController } from "../controllers/FindTuristSpotController";
 import { ListTuristSpotController } from "../controllers/ListTuristSpotController";
+import { ListRatingByTuristSpotController } from "../controllers/ListRatingByTuristSpotController";
 
 import { validateLoginMiddleware } from "../middlewares/validateLogin.middleware";
 import { validateTuristSpotListMiddleware } from "../middlewares/validateTuristspot.middleware";
 import { validateTuristSpotFindMiddleware } from "../middlewares/validateTuristSpotFind.middleware";
+import { validateTuristSpotRatingGetMiddleware } from "../middlewares/validateTuristSpotRatingGet.middleware";
 
 const publicRoute = Router();
 
@@ -24,8 +26,8 @@ publicRoute.get(
 
 publicRoute.get(
     '/rating/listByTuristSpot',
-    validateTuristSpotListMiddleware,
-    ListTuristSpotController
+    validateTuristSpotRatingGetMiddleware,
+    ListRatingByTuristSpotController,
 );
 
 publicRoute.get(

@@ -24,42 +24,47 @@ export const FindTuristSpotController = async (req: Request, res: Response) => {
         } = req.query;
         let turistspotFinded: Array<ITuristSpot> = [];
         //find by postalcode
-        const listByPostalCode = await turistSpotService.findAll({
-            where: {
-                postalCode
-            }
-        });
-        turistspotFinded = turistspotFinded.concat(listByPostalCode);
+        if (postalCode) {
+            const listByPostalCode = await turistSpotService.findAll({
+                where: {
+                    postalCode
+                }
+            });
+            turistspotFinded = turistspotFinded.concat(listByPostalCode);
+        }
         //find its like by state
-        const listByState = await turistSpotService.findAll({
-            having: { lower: state },
-            where: {
-                postalCode: {
-                    [Op.like]: state,
+        if (state) {
+            const listByState = await turistSpotService.findAll({
+                where: {
+                    postalCode: {
+                        [Op.iLike]: state,
+                    }
                 }
-            }
-        });
-        turistspotFinded = turistspotFinded.concat(listByState);
+            });
+            turistspotFinded = turistspotFinded.concat(listByState);
+        }
         //find its like by city
-        const listByCity = await turistSpotService.findAll({
-            having: { lower: city },
-            where: {
-                city: {
-                    [Op.like]: city,
+        if (city) {
+            const listByCity = await turistSpotService.findAll({
+                where: {
+                    city: {
+                        [Op.iLike]: city,
+                    }
                 }
-            }
-        });
-        turistspotFinded = turistspotFinded.concat(listByCity);
+            });
+            turistspotFinded = turistspotFinded.concat(listByCity);
+        }
         //find its like by Street
-        const listByStreet = await turistSpotService.findAll({
-            having: { lower: street },
-            where: {
-                street: {
-                    [Op.like]: street,
+        if (street) {
+            const listByStreet = await turistSpotService.findAll({
+                where: {
+                    street: {
+                        [Op.iLike]: street,
+                    }
                 }
-            }
-        });
-        turistspotFinded = turistspotFinded.concat(listByStreet);
+            });
+            turistspotFinded = turistspotFinded.concat(listByStreet);
+        }
         let turistspotList = new Array<ITuristSpot>();
         //remove repeat turistspots
         turistspotFinded.map((turistSpotFound) => {
@@ -80,7 +85,8 @@ export const FindTuristSpotController = async (req: Request, res: Response) => {
         })
         .end();
         return;
-    } catch {
+    } catch(error) {
+        console.log(error);
         res.status(500)
         .json({ code: 'unknow-error' })
         .end();

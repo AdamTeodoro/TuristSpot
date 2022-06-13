@@ -20,5 +20,5 @@ export const TuristSpotFindSchema = Joi.object({
         .min(1)
         .max(500),
 
-    }).required().or('state', 'city', 'street', 'postalCode')
-})
+    }).or('state', 'city', 'street', 'postalCode')
+}).unknown(true);

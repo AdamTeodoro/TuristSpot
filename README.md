@@ -109,11 +109,11 @@
 
 ## PÚBLICO
 
-    - Listagem de pontos turísticos se estiver ativo ✔️
+    - Listagem de pontos turísticos se estiver ativo ✅
 
-    - Listagem das avaliações de um ponto turístico ✔️
+    - Listagem das avaliações de um ponto turístico ✅
 
-    - Buscar ponto turístico pelo cep, endereço, cidade e estado ✔️
+    - Buscar ponto turístico pelo cep, endereço, cidade e estado ✅
 
 
 ## DOCUMENTAÇÃO
