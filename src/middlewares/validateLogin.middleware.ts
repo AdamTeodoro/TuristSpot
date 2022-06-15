@@ -10,7 +10,7 @@ type Request = {
 }
 
 export const validateLoginMiddleware = (req: Request, res: Response, next: NextFunction) => {
-    try {
+    try { console.log("LoginSchema.validate(req).error", LoginSchema.validate(req).error)
         if (LoginSchema.validate(req).error) {
             res.status(400)
             .json({ code: 'invalid-request-data' })

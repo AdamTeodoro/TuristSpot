@@ -115,6 +115,10 @@
 
     - Buscar ponto turístico pelo cep, endereço, cidade e estado ✅
 
+    - Listagem das imagens dos pontos turísticos ❌
+
+    - Listagem das imagens das avaliações de usuários ❌
+
 
 ## DOCUMENTAÇÃO
 

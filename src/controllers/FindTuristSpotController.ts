@@ -36,7 +36,7 @@ export const FindTuristSpotController = async (req: Request, res: Response) => {
         if (state) {
             const listByState = await turistSpotService.findAll({
                 where: {
-                    postalCode: {
+                    state: {
                         [Op.iLike]: state,
                     }
                 }
