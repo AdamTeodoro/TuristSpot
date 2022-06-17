@@ -7,6 +7,8 @@ import { CreateRatingController } from "../controllers/CreateRatingController";
 import { CreateRatingPictureController } from "../controllers/CreateRatingPictureController";
 import { UpdateUserController } from "../controllers/UpdateUserController";
 import { RegisterUserController } from "../controllers/RegisterUserController";
+import { UpdateRatingController } from "../controllers/UpdateRatingController";
+import { DeleteRatingPictureController } from "../controllers/DeleteRatingPictureController";
 
 import { validateActiveUserMiddleware } from "../middlewares/validateActiveUser.middleware";
 import { validateAuthMiddleware } from "../middlewares/validateAuth.middleware";
@@ -16,9 +18,7 @@ import { validateRatingPictureCreationMiddleware } from "../middlewares/validate
 import { validateUserCreationMiddleware } from "../middlewares/validateUserCreation.middleware";
 import { validateEmailExistsMiddleware } from "../middlewares/validateUserEmail.middleware";
 import { validateUserUpdationMiddleware } from "../middlewares/validateUserUpdation.middlware";
-import { UpdateRatingController } from "../controllers/UpdateRatingController";
 import { validateRatingPictureDeletionMiddleware } from "../middlewares/validateRatingPictureDeletion.middleware";
-import { DeleteRatingPictureController } from "../controllers/DeleteRatingPictureController";
 
 const userRoute = Router();
 
