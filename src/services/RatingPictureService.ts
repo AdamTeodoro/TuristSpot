@@ -6,6 +6,7 @@ import { IRating } from '../interfaces/IRating';
 import { db } from '../database/database';
 
 import { IRatingPicture } from '../interfaces/IRatingPicture';
+import { environmentService } from './EnvironmentService';
 
 export type RatingPictureModel = typeof Model & {
  new (values?: Partial<IRating>, options?: BuildOptions): IRatingPicture
@@ -24,7 +25,7 @@ function build(sequelize: Sequelize) {
             allowNull: false,
             references: {
                 key: 'id',
-                model: 'SimpleUser'
+                model: 'User'
             }
         },
         idRating: {
@@ -44,7 +45,11 @@ function build(sequelize: Sequelize) {
             allowNull: true
         },
         imgUrl: {
-            type: DataTypes.VIRTUAL
+            type: DataTypes.VIRTUAL,
+            get() {
+                const { URL_DEFAULT } = environmentService.getEnvironmnet();
+                return `${URL_DEFAULT}/images/ratingpictures/${this.getDataValue('filename')}`;
+            }
         }
     }, { tableName: "RATINGPICTURES", timestamps: true }) as RatingPictureModel;
 }

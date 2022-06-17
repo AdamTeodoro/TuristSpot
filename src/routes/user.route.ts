@@ -7,6 +7,8 @@ import { CreateRatingController } from "../controllers/CreateRatingController";
 import { CreateRatingPictureController } from "../controllers/CreateRatingPictureController";
 import { UpdateUserController } from "../controllers/UpdateUserController";
 import { RegisterUserController } from "../controllers/RegisterUserController";
+import { UpdateRatingController } from "../controllers/UpdateRatingController";
+import { DeleteRatingPictureController } from "../controllers/DeleteRatingPictureController";
 
 import { validateActiveUserMiddleware } from "../middlewares/validateActiveUser.middleware";
 import { validateAuthMiddleware } from "../middlewares/validateAuth.middleware";
@@ -16,7 +18,7 @@ import { validateRatingPictureCreationMiddleware } from "../middlewares/validate
 import { validateUserCreationMiddleware } from "../middlewares/validateUserCreation.middleware";
 import { validateEmailExistsMiddleware } from "../middlewares/validateUserEmail.middleware";
 import { validateUserUpdationMiddleware } from "../middlewares/validateUserUpdation.middlware";
-import { UpdateRatingController } from "../controllers/UpdateRatingController";
+import { validateRatingPictureDeletionMiddleware } from "../middlewares/validateRatingPictureDeletion.middleware";
 
 const userRoute = Router();
 
@@ -49,7 +51,7 @@ userRoute.put(
     validateAuthMiddleware,
     validateActiveUserMiddleware,
     UpdateRatingController
-)
+);
 
 userRoute.post(
     '/user/ratingPicture/create',
@@ -63,12 +65,10 @@ userRoute.post(
 
 userRoute.delete(
     '/user/ratingPicture/delete',
-    validateRatingPictureCreationMiddleware,
+    validateRatingPictureDeletionMiddleware,
     validateAuthMiddleware,
     validateActiveUserMiddleware,
-    validateRatingPicture,
-    multer(multerConfig).single('image'),
-    CreateRatingPictureController,
+    DeleteRatingPictureController,
 );
 
 export { userRoute };

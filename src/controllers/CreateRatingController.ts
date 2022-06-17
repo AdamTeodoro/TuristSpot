@@ -22,10 +22,16 @@ export async function CreateRatingController(req: Request, res: Response) {
         const idUser: number = req.idUser as number;
         const idTuristSpot = Number(req.query.idTuristSpot);
         //verify if turistspot id is valid
-        const refturistSpot = await turistSpotService.findByPk(idTuristSpot)
+        const refturistSpot = await turistSpotService.findOne({
+            where: {
+                id: idTuristSpot,
+                isActive: true
+            }
+        });
+        //verify if turistspot is valid
         if (!refturistSpot) {
-            res.status(400)
-            .json({ code: 'invalid-turistspot-id' })
+            res.status(401)
+            .json({ code: 'invalid-turistspot' })
             .end();
             return;
         }
@@ -36,27 +42,31 @@ export async function CreateRatingController(req: Request, res: Response) {
                 idSimpleUser: idUser,
             }
         });
-        // 
+        // verify user already create rating
         if (ratingUserExists) {
             res.status(400)
             .json({ code: 'rating-already-exists' })
             .end();
             return;
         }
-        let newSumAverage;
+        let newAverage;
         let newQtdRating;
         //calculate new rating from turistspot
         if (refturistSpot.average === -1) {
-            newSumAverage = rating.rating;
+            newAverage = rating.rating;
+            newQtdRating = 1;
         } else {
             const sumAverage = (refturistSpot.qtdRatings * refturistSpot.average);
-            newSumAverage = sumAverage + rating.rating;
+            console.log(sumAverage);
+            newQtdRating = refturistSpot.qtdRatings + 1;
+            console.log(newQtdRating)
+            newAverage = (sumAverage + rating.rating) / newQtdRating;
+            console.log(newAverage);
         }
-        newQtdRating = refturistSpot.qtdRatings + 1;
         // update turist spot
         await refturistSpot.update({
             qtdRatings: newQtdRating,
-            average: (newSumAverage / newQtdRating)
+            average: newAverage
         });
         //create rating
         const createdRating = await ratingService.create({

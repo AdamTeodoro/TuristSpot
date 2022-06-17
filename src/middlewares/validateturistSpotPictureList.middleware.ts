@@ -1,28 +1,28 @@
-import { NextFunction, Response } from "express";
 
-import { TuristSpotListSchema } from "../schemas/requests/TuristSpotList.schema";
+import { NextFunction, Response } from "express";
+import { TuristSpotPictureListSchema } from "../schemas/requests/TuristSpotPictureList.schema";
+
 
 type Request = {
     query: {
-        lastTuristSpot?: number
+        idTuristSpot: number
     }
 };
 
-export const validateTuristSpotListMiddleware = (req: Request, res: Response, next: NextFunction) => {
+export const validateturistSpotPictureListMiddleware = (req: Request, res: Response, next: NextFunction) => {
     try {
-        if (TuristSpotListSchema.validate(req).error) {
+        if (TuristSpotPictureListSchema.validate(req).error) {
             res.status(400)
             .json({ code: 'invalid-request-data' })
             .end();
             return;
-        } else {
-            next();
-            return;
         }
+        next();
+        return;
     } catch {
         res.status(500)
         .json({ code: 'unknow-error' })
         .end();
         return;
     }
-};
+}

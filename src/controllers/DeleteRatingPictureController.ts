@@ -19,33 +19,34 @@ type Request = {
 export const DeleteRatingPictureController = async (req: Request, res: Response) => {
     try {
         const idPicture = req.query.idPicture;
-        const refPicture = await ratingPictureService
+        const refRatingPicture = await ratingPictureService
         .findByPk(idPicture);
         //verify if refPicture exits
-        if (!refPicture) {
+        if (!refRatingPicture) {
             res.status(400)
             .json({ code: 'invalid-request-data' })
             .end();
             return;
         }
         //verify if is valid authorization
-        if (refPicture.idSimpleUser !== req.idUser) {
+        console.log(refRatingPicture.idUser, req.idUser)
+        if (refRatingPicture.idUser != req.idUser) {
             res.status(403)
             .json({ code: 'invalid-authorization' })
             .end();
             return;
         }
         //get file
-        const filename: string = refPicture.filename as string;
+        const filename: string = refRatingPicture.filename as string;
         //get flie path
         await imgService.deleteImg(
             filename,
             'RATINGPICTURES'
         );
         //delete database object representation
-        await refPicture.destroy();
+        await refRatingPicture.destroy();
         //decrease qtd rating
-        const refRating = await ratingService.findByPk(refPicture.idRating) as IRating;
+        const refRating = await ratingService.findByPk(refRatingPicture.idRating) as IRating;
         await refRating.update({
             qtdImg: refRating.qtdImg--            
         });

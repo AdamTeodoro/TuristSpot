@@ -39,11 +39,13 @@ export async function UpdateRatingController(req: Request, res: Response) {
         //get turistspot
         const refTuristSpot = await turistSpotService.findByPk(idTuristSpot) as ITuristSpot;
         //calculate new rating from turistspot
-        const sumAverage = (refTuristSpot.qtdRatings * refTuristSpot.average) - refTuristSpot.average;
-        const newSumAverage = sumAverage + rating.rating;
+        const sumAverage = (refTuristSpot.qtdRatings * refTuristSpot.average) - refRating.rating;
+        console.log(sumAverage);
+        const newAverage = (sumAverage + rating.rating) / refTuristSpot.qtdRatings;
+        console.log(refTuristSpot.qtdRatings);
         // update turist spot average
         await refTuristSpot.update({
-            average: (newSumAverage / refTuristSpot.qtdRatings)
+            average: newAverage
         });
         //update rating
         await refRating.update({

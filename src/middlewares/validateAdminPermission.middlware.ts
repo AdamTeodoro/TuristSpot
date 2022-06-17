@@ -7,7 +7,7 @@ import { UserData } from "../services/UserService";
 type Request = {
     headers: {
         authorization?: string,
-    }
+    },
     query: {
         idPermission: number,
     },
