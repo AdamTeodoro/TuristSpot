@@ -4,7 +4,6 @@ import express from 'express';
 import swagger from 'swagger-ui-express';
 import { resolve } from 'path';
 
-
 import * as swaggerDoc from "./swagger.json";
 
 import { adminRoute } from './routes/admin.route';

@@ -115,14 +115,14 @@
 
     - Buscar ponto turístico pelo cep, endereço, cidade e estado ✅
 
-    - Listagem das imagens dos pontos turísticos ❌
+    - Listagem das imagens dos pontos turísticos ✅
 
-    - Listagem das imagens das avaliações de usuários ❌
+    - Listagem das imagens das avaliações de usuários ✅
 
 
 ## DOCUMENTAÇÃO
 
-    - Fazer a documentação da api com swagger ❌
+    - Fazer a documentação da api com swagger ✅
 
 </details>
 

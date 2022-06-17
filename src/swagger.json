@@ -358,7 +358,7 @@
                 "tags": [ "rating", "user" ],
                 "parameters": [
                     {
-                        "name": "idTuristSpot",
+                        "name": "idRating",
                         "in": "query",
                         "required": true,
                         "schema": {
@@ -381,9 +381,9 @@
                             "schema": {
                                 "type": "object",
                                 "properties": {
-                                    "rating": {
+                                    "image": {
                                         "type": "object",
-                                        "$ref": "#/components/schemas/RequestRating"
+                                        "description": "File type image"
                                     }
                                 }
                             }
@@ -411,6 +411,541 @@
                     }
                 }
             }
+        },
+        "/user/ratingPicture/delete": {
+            "delete": {
+                "description": "Essa rota serve para apagar a imagem de uma avaliação de ponto turístico.",
+                "tags": [ "rating", "user" ],
+                "parameters": [
+                    {
+                        "name": "idRating",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Token de autenticação do usuário."
+                    }
+                ],
+                "responses": {
+                    "200": {          
+                        "description": "Retorna um código descritivo e a avaliação criada.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "string"
+                                        },
+                                        "createdRating": {
+                                            "$ref": "#/components/schemas/Rating"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/update": {
+            "put": {
+                "description": "Essa rota serve para atualizar os dados do usuário.",
+                "tags": [ "user" ],
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Token de autenticação do usuário."
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "user": {
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/RequestUser"
+                                    },
+                                    "pass": {
+                                        "type": "object",
+                                        "properties": {
+                                            "oldPassword": {
+                                                "type": "string"
+                                            },
+                                            "newPassword": {
+                                                "type": "string",
+                                                "description": "É obrigatório somente na atualização de senha."
+                                            }
+                                        },
+                                        "required": [ "oldPassword" ]
+                                    }
+                                },
+                                "required": [
+                                    "user",
+                                    "pass"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {          
+                        "description": "Retorna um código descritivo.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/create": {
+            "post": {
+                "description": "Essa rota serve para criar um novo usuário.",
+                "tags": [ "user" ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "user": {
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/RequestUser"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "minLength": 8,
+                                        "maxLength": 256
+                                    }
+                                },
+                                "required": [
+                                    "user",
+                                    "password"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {          
+                        "description": "Retorna um código descritivo e os dados do usuário criado.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "string"
+                                        },
+                                        "userCreated": {
+                                            "$ref": "#/components/schemas/User"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/turistSpot/create": {
+            "post": {
+                "description": "Somente administradores podem criar um ponto turístico através dessa rota.",
+                "tags": [ "admin", "turistspot" ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "turistSpot": {
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/RequestTuristspot"
+                                    }
+                                },
+                                "required": [ "turistSpot" ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {          
+                        "description": "Retorna um código descritivo e os dados do ponto turístico criado.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "string"
+                                        },
+                                        "turistSpotCreated": {
+                                            "$ref": "#/components/schemas/Turistspot"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/turistSpot/update": {
+            "put": {
+                "description": "Somente administradores podem atualizar um ponto turístico através dessa rota.",
+                "tags": [ "admin", "turistspot" ],
+                "parameters": [
+                    {
+                        "name": "idTuristSpot",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "turistSpot": {
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/RequestTuristspot"
+                                    }
+                                },
+                                "required": [ "turistSpot" ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {          
+                        "description": "Retorna um código descritivo.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/turistSpotPicture/create": {
+            "post": {
+                "description": "Essa rota serve para que os administradores adicionem imagens para os pontos turísticos.",
+                "tags": [ "admin", "turistspot" ],
+                "parameters": [
+                    {
+                        "name": "idTuristSpot",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "image": {
+                                        "type": "object",
+                                        "description": "Arquivo do tipo imagem."
+                                    }
+                                },
+                                "required": [
+                                    "image"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {          
+                        "description": "Retorna um código descritivo.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/turistSpot/delete": {
+            "delete": {
+                "description": "Essa rota serve para apaar imagens dos pontos turísticos.",
+                "tags": [ "admin", "turistspot" ],
+                "parameters": [
+                    {
+                        "name": "idTuristSpot",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {          
+                        "description": "Retorna um código descritivo.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/permission/create": {
+            "post": {
+                "description": "Essa rota serve para gerar a permissão de cadastro de um novo administrdor.",
+                "tags": [ "admin" ],
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {          
+                        "description": "Retorna um código descritivo e a permissão de registro de admin.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "string"
+                                        },
+                                        "permission": {
+                                            "$ref": "#/components/schemas/Permission"
+                                        },
+                                        "urlToRegister": {
+                                            "type": "string",
+                                            "description": "Uma url para o registro de usuário passando os dados da permissão por parâmetro na consulta."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/rating/delete": {
+            "delete": {
+                "description": "Essa rota serve para apagar o comentário de um usuário.",
+                "tags": [ "admin", "rating" ],
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "idRating",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {          
+                        "description": "Retorna um código descritivo.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            } 
+        },
+        "/admin/simpleUser/inactive": {
+            "put": {
+                "description": "Essa rota serve para atualizar o usuário para inativo.",
+                "tags": [ "admin", "user" ],
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "idSimpleUser",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "description": "Identificador do usuário"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {          
+                        "description": "Retorna um código descritivo.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            } 
+        },
+        "/admin/register": {
+            "post": {
+                "description": "Essa rota serve para registrar um administrador.",
+                "tags": [ "admin" ],
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "Autorização para criar um administrador."
+                        }
+                    },
+                    {
+                        "name": "idPermission",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "description": "Identificador do usuário"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "user": {
+                                        "$ref": "#/components/schemas/RequestUser"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {          
+                        "description": "Retorna um código descritivo.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            } 
         }
     },
     "components": {
@@ -605,16 +1140,22 @@
                     }
                 },
                 "required": [ "commentary", "rating" ] 
-            }
-        },
-        "parameters": {
-            "id": {
-                "name": "id",
-                "in": "query",
-                "description": "É único para identificação do elemento.",
-                "required": true,
-                "schema": {
-                  "type": "number"
+            },
+            "Permission": {
+                "properties": {
+                    "authorization": {
+                        "type": "string",
+                        "description": "Autorização para criação de admin."
+                    },
+                    "idPermission": {
+                        "type": "integer"
+                    },
+                    "isActive": {
+                        "type": "boolean"
+                    },
+                    "expiration": {
+                        "type": "string"
+                    }
                 }
             }
         }
