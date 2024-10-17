@@ -26,22 +26,22 @@ export async function CreateTuristSpotPicturesController(req: Request, res: Resp
             });
             //send turist spot
             res.status(200)
-            .json({
-                code: 'success-to-create-turistspot-picture',
-                turistSpotPictureUpdated
-            })
-            .end();
+                .json({
+                    code: 'success-to-create-turistspot-picture',
+                    turistSpotPictureUpdated
+                })
+                .end();
             return;
         } else {
             res.status(400)
-            .json({ code: 'invalid-request-turistspostpicture' })
-            .end();
+                .json({ code: 'invalid-request-turistspostpicture' })
+                .end();
             return;
         }
     } catch {
         res.status(200)
-        .json({ code: 'unknow-error' })
-        .end();
+            .json({ code: 'unknow-error' })
+            .end();
         return;
     }
 }

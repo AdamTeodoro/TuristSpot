@@ -7,23 +7,23 @@ export const RatingCreationSchema = Joi.object({
     
     query: Joi.object({
         idTuristSpot: Joi.number()
-        .integer()
-        .min(1)
-        .max(9999999999999)
-        .required()
+            .integer()
+            .min(1)
+            .max(9999999999999)
+            .required()
     }).required(),
 
     body: Joi.object({
         rating: Joi.object({
             commentary: Joi.string()
-            .min(3)
-            .max(256)
-            .required(),
+                .min(3)
+                .max(256)
+                .required(),
 
             rating: Joi.number()
-            .min(1)
-            .max(10)
-            .required()
+                .min(1)
+                .max(10)
+                .required()
         }).required()
     }).required()
 

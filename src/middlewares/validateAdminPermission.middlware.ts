@@ -26,8 +26,8 @@ export const validateAdminPermissionMiddleware = async (req: Request, res: Respo
         //verify with jwt if authorization is valid
         if (!refPermission) {
             res.status(400)
-            .json({ code: 'invalid-permission' })
-            .end();
+                .json({ code: 'invalid-permission' })
+                .end();
             return;
         }
         //validate expiration time from permission
@@ -35,8 +35,8 @@ export const validateAdminPermissionMiddleware = async (req: Request, res: Respo
             //update permission status
             await refPermission.update({ isActive: false });
             res.status(401)
-            .json({ code: 'permission-expired' })
-            .end();
+                .json({ code: 'permission-expired' })
+                .end();
             return;
         }
         //verify if authorization is valid
@@ -46,8 +46,8 @@ export const validateAdminPermissionMiddleware = async (req: Request, res: Respo
             async (error, decoded) => {
                 if (error) {
                     res.status(400)
-                    .json({ code: 'invalid-authorization'})
-                    .end();
+                        .json({ code: 'invalid-authorization'})
+                        .end();
                     return;
                 }
                 //inactive permission if valid
@@ -58,8 +58,8 @@ export const validateAdminPermissionMiddleware = async (req: Request, res: Respo
         );
     } catch {
         res.status(400)
-        .json({ code: 'invalid-credencials' })
-        .end();
+            .json({ code: 'invalid-credencials' })
+            .end();
         return;
     }
 }

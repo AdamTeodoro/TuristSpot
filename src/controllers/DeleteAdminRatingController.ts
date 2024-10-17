@@ -55,14 +55,13 @@ export const DeleteAdminRatingController = async (req: Request, res: Response, n
         });
         //send success mensage
         res.status(200)
-        .json({ code: 'success-to-delete-rating' })
-        .end();
+            .json({ code: 'success-to-delete-rating' })
+            .end();
         return;
     } catch(error) {
-        console.log(error);
         res.status(500)
-        .json({ code: 'unknow-error' })
-        .end();
+            .json({ code: 'unknow-error' })
+            .end();
         return;
     }
 }

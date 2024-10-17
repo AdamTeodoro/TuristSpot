@@ -32,23 +32,22 @@ export async function UpdateTuristSpotController(req: Request, res: Response) {
             });
             //send turist spot
             res.status(200)
-            .json({
-                code: 'success-to-update-turist-spot',
-                turistSpotUpdated
-            })
-            .end();
+                .json({
+                    code: 'success-to-update-turist-spot',
+                    turistSpotUpdated
+                })
+                .end();
             return;
         } else {
             res.status(400)
-            .json({ code: 'invalid-request-turistspot' })
-            .end();
+                .json({ code: 'invalid-request-turistspot' })
+                .end();
             return;
         }
     } catch(error) {
-        console.log('onUpdateTuristControllerError', error)
         res.status(500)
-        .json({ code: 'unknow-error' })
-        .end();
+            .json({ code: 'unknow-error' })
+            .end();
         return;
     }
 }

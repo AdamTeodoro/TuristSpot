@@ -17,8 +17,8 @@ export const ListRatingPictureController = async (req: Request, res: Response, n
         const refRating = await ratingService.findByPk(idRating);
         if (!refRating) {
             res.status(400)
-            .json({ code: 'invalid-request-turistspot' })
-            .end();
+                .json({ code: 'invalid-request-turistspot' })
+                .end();
             return;
         }
         //// get pictures list
@@ -29,16 +29,16 @@ export const ListRatingPictureController = async (req: Request, res: Response, n
         });
         //send pictures list
         res.status(200)
-        .json({
-            code: 'success-to-list-pictures',
-            turistSpotPictureList: refTuristSpotPicture
-        })
-        .end();
+            .json({
+                code: 'success-to-list-pictures',
+                turistSpotPictureList: refTuristSpotPicture
+            })
+            .end();
         return
     } catch {
         res.status(500)
-        .json({ code: 'invalid-request-data' })
-        .end();
+            .json({ code: 'invalid-request-data' })
+            .end();
         return;
     }
 }

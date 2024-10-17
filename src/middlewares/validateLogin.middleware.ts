@@ -10,20 +10,19 @@ type Request = {
 }
 
 export const validateLoginMiddleware = (req: Request, res: Response, next: NextFunction) => {
-    try { console.log("LoginSchema.validate(req).error", LoginSchema.validate(req).error)
+    try { 
         if (LoginSchema.validate(req).error) {
             res.status(400)
-            .json({ code: 'invalid-request-data' })
-            .end();
+                .json({ code: 'invalid-request-data' })
+                .end();
             return;
         }
         next();
         return;
     } catch(error) {
-        console.log("validateLoginMiddleware: ", error);
         res.status(500)
-        .json({ code: 'internal-server-error' })
-        .end();
+            .json({ code: 'internal-server-error' })
+            .end();
         return;
     }
 }

@@ -21,17 +21,16 @@ export const validateRatingCreationMiddleware = async (req: Request, res: Respon
     try {
         if (RatingCreationSchema.validate(req).error) {
             res.status(400)
-            .json({ code: 'invalid-request-data' })
-            .end();
+                .json({ code: 'invalid-request-data' })
+                .end();
             return;
         }
         next();
         return;
     } catch(error) {
-        console.log("erro ao validar rating", error);
         res.status(500)
-        .json({ code: 'internal-server-error' })
-        .end();
+            .json({ code: 'internal-server-error' })
+            .end();
         return;
     }
 }

@@ -13,8 +13,8 @@ export const validateTuristSpotRatingGetMiddleware = (req: Request, res: Respons
     try {
         if (TuristSpotRatingGetSchema.validate(req).error) {
             res.status(400)
-            .json({ code: 'invalid-request-data' })
-            .end();
+                .json({ code: 'invalid-request-data' })
+                .end();
             return;
         } else {
             next();
@@ -22,8 +22,8 @@ export const validateTuristSpotRatingGetMiddleware = (req: Request, res: Respons
         }
     } catch {
         res.status(500)
-        .json({ code: 'invalid-request-data' })
-        .end();
+            .json({ code: 'invalid-request-data' })
+            .end();
         return;
     }
 }

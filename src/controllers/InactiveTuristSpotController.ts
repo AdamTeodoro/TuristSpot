@@ -23,22 +23,22 @@ export async function InactiveTuristSpotController(req: Request, res: Response) 
             });
             //send turist spot inactived
             res.status(200)
-            .json({
-                code: 'success-to-inactive-turistspot',
-                turistSpotInactived
-            })
-            .end();
+                .json({
+                    code: 'success-to-inactive-turistspot',
+                    turistSpotInactived
+                })
+                .end();
             return
         } else {
             res.status(400)
-            .json({ code: 'invalid-request-turistspot' })
-            .end();
+                .json({ code: 'invalid-request-turistspot' })
+                .end();
             return
         }
     } catch {
         res.status(500)
-        .json({ code: 'unknow-error' })
-        .end();
+            .json({ code: 'unknow-error' })
+            .end();
         return;
     }
 }

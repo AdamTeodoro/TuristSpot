@@ -9,9 +9,9 @@ export const AdminInactivationSchema = Joi.object({
 
     query: Joi.object({
         idSimpleUser: Joi.number()
-        .integer()
-        .min(1)
-        .max(9999999999999)
-        .required()
+            .integer()
+            .min(1)
+            .max(9999999999999)
+            .required()
     })
 }).unknown(true)

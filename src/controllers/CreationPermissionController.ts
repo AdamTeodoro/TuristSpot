@@ -41,23 +41,22 @@ export const CreationPermissionController = async (req: Request, res: Response) 
         const urlToRegister = `${URL_DEFAULT}/admin/register?` + query1 + query2;
         //send url to register admin
         res.status(200)
-        .json({
-            code: 'success-to-generate-permission',
-            permission: {
-                authorization,
-                idPermission: permissionCreated.id,
-                isActive: true,
-                expiration: permissionCreated.expiration
-            },
-            urlToRegister
-        })
-        .end();
+            .json({
+                code: 'success-to-generate-permission',
+                permission: {
+                    authorization,
+                    idPermission: permissionCreated.id,
+                    isActive: true,
+                    expiration: permissionCreated.expiration
+                },
+                urlToRegister
+            })
+            .end();
         return;
     } catch(error) {
-        console.log(error);
         res.status(500)
-        .json({ code: 'unknow-error' })
-        .end();
+            .json({ code: 'unknow-error' })
+            .end();
         return;
     }
 }

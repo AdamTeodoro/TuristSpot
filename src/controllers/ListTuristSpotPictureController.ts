@@ -16,8 +16,8 @@ export const ListTuristSpotPictureController = async (req: Request, res: Respons
         const refTuristSpot = await turistSpotService.findByPk(idTuristSpot);
         if (!refTuristSpot) {
             res.status(400)
-            .json({ code: 'invalid-request-turistspot' })
-            .end();
+                .json({ code: 'invalid-request-turistspot' })
+                .end();
             return;
         }
         //get turistspot images
@@ -28,16 +28,16 @@ export const ListTuristSpotPictureController = async (req: Request, res: Respons
         });
         //response with pictures list
         res.status(200)
-        .json({
-            code: 'success-to-list-pictures',
-            turistSpotPictureList: refTuristSpotPicture
-        })
-        .end();
+            .json({
+                code: 'success-to-list-pictures',
+                turistSpotPictureList: refTuristSpotPicture
+            })
+            .end();
         return;
     } catch {
         res.status(500)
-        .json({ code: 'invalid-request-data' })
-        .end();
+            .json({ code: 'invalid-request-data' })
+            .end();
         return;
     }
 }

@@ -5,13 +5,13 @@ export const LoginSchema = Joi.object({
     body: Joi.object({
 
         email: Joi.string()
-        .pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
-        .required(),
+            .pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
+            .required(),
     
         password: Joi.string()
-        .min(8)
-        .max(256)
-        .required()
+            .min(8)
+            .max(256)
+            .required()
 
     }).unknown(true)
     

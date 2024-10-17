@@ -20,19 +20,19 @@ export const InactiveAdminUserController = async (req: Request, res: Response, n
             //update simple user status
             await refSimpleUser.update({ isActive: false });
             res.status(200)
-            .json({ code: 'success-to-inactive-user' })
-            .end();
+                .json({ code: 'success-to-inactive-user' })
+                .end();
             return;
         } else {
             res.status(401)
-            .json({ code: 'fail-to-inactive-user' })
-            .end();
-            return;
+                .json({ code: 'fail-to-inactive-user' })
+                .end();
+                return;
         }
     } catch {
         res.status(500)
-        .json({ code: 'unknow-error' })
-        .end();
+            .json({ code: 'unknow-error' })
+            .end();
         return;
     }
 }

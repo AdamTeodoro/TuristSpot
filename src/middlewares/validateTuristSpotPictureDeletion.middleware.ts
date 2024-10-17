@@ -6,18 +6,17 @@ export const validateTuristSpotPictureDeletionMiddleware = (req: Request, res: R
     try {
         if (TuristSpotPictureDeletionSchema.validate(req).error) {
             res.status(400)
-            .json({ code: 'invalid-request-data' })
-            .end();
+                .json({ code: 'invalid-request-data' })
+                .end();
             return;
         } else {
             next();
             return;
         }
     } catch(error) {
-        console.log(error);
         res.status(500)
-        .json({ code: 'internal-server-error' })
-        .end();
+            .json({ code: 'internal-server-error' })
+            .end();
         return;
     }
 }

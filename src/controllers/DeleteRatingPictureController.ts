@@ -19,21 +19,19 @@ type Request = {
 export const DeleteRatingPictureController = async (req: Request, res: Response) => {
     try {
         const idPicture = req.query.idPicture;
-        const refRatingPicture = await ratingPictureService
-        .findByPk(idPicture);
+        const refRatingPicture = await ratingPictureService.findByPk(idPicture);
         //verify if refPicture exits
         if (!refRatingPicture) {
             res.status(400)
-            .json({ code: 'invalid-request-data' })
-            .end();
+                .json({ code: 'invalid-request-data' })
+                .end();
             return;
         }
         //verify if is valid authorization
-        console.log(refRatingPicture.idUser, req.idUser)
         if (refRatingPicture.idUser != req.idUser) {
             res.status(403)
-            .json({ code: 'invalid-authorization' })
-            .end();
+                .json({ code: 'invalid-authorization' })
+                .end();
             return;
         }
         //get file
@@ -47,18 +45,16 @@ export const DeleteRatingPictureController = async (req: Request, res: Response)
         await refRatingPicture.destroy();
         //decrease qtd rating
         const refRating = await ratingService.findByPk(refRatingPicture.idRating) as IRating;
-        await refRating.update({
-            qtdImg: refRating.qtdImg--            
-        });
+        await refRating.update({ qtdImg: refRating.qtdImg-- });
         //res the success mensage
         res.status(200)
-        .json({ code: 'success-to-delete-turistspot-picture' })
-        .end();
+            .json({ code: 'success-to-delete-turistspot-picture' })
+            .end();
         return;
     } catch {
         res.status(500)
-        .json({ code: 'internal-server-error' })
-        .end();
+            .json({ code: 'internal-server-error' })
+            .end();
         return;
     }
 }

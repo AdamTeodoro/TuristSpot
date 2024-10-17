@@ -19,15 +19,14 @@ export const validateAdminMiddleware = async (req: Request, res: Response, next:
             return;
         } else {
             res.status(403)
-            .json({ code: 'invalid-authorization' })
-            .end();
+                .json({ code: 'invalid-authorization' })
+                .end();
             return;
         }
     } catch {
-        console.log("validateAdminMiddleware");
         res.status(500)
-        .json({ code: 'unknow-error' })
-        .end();
+            .json({ code: 'unknow-error' })
+            .end();
         return;
     }
 }

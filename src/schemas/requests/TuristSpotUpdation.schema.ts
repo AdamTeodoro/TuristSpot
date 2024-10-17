@@ -9,9 +9,9 @@ export const TuristSpotUpdationSchema = Joi.object({
 
     query: Joi.object({
         idTuristSpot: Joi.number()
-        .min(1)
-        .max(9999999999999)
-        .required()
+            .min(1)
+            .max(9999999999999)
+            .required()
     }),
 
     body: Joi.object({

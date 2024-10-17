@@ -21,11 +21,11 @@ export async function DeleteTuristSpotPicturesController(req: Request, res: Resp
         const idPicture = req.query.idPicture as number;
         //verfify if picture exists
         const refPicture = await turistSpotPictureService
-        .findByPk(idPicture);
+            .findByPk(idPicture);
         if (!refPicture) {
             res.status(400)
-            .json({ code: 'invalid-request-data' })
-            .end();
+                .json({ code: 'invalid-request-data' })
+                .end();
             return;
         }
         const filename: string = refPicture.filename as string;
@@ -46,14 +46,13 @@ export async function DeleteTuristSpotPicturesController(req: Request, res: Resp
         await refPicture.destroy();
         //res the success mensage
         res.status(200)
-        .json({ code: 'success-to-delete-turistspot-picture' })
-        .end();
+            .json({ code: 'success-to-delete-turistspot-picture' })
+            .end();
         return;
     } catch(error) {
-        console.log(error);
         res.status(500)
-        .json({ code: 'internal-server-error' })
-        .end();
+            .json({ code: 'internal-server-error' })
+            .end();
         return;
     }
 }

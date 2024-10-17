@@ -14,13 +14,12 @@ export const GetTuristSpotRatingController = async (req: Request, res: Response)
     try {
         const { idTuristSpot, lastRating } = req.query;
         let ratingList = [];
-
         const refTuristSpot = await turistSpotService.findByPk(idTuristSpot);
         if (!refTuristSpot || !refTuristSpot.isActive) {
             res.status(400)
-            .json({ code: 'invalid-request-data' })
-            .end();
-            return;
+                .json({ code: 'invalid-request-data' })
+                .end();
+                return;
         }
         //verify if last rating exists
         if (lastRating) {
@@ -47,15 +46,17 @@ export const GetTuristSpotRatingController = async (req: Request, res: Response)
         }
         //send success mensage an rating list
         res.status(200)
-        .json({ 
-            code: 'success-to-list-ratings',
-            turistSpotFounded: refTuristSpot, 
-            ratingList
-        })
+            .json({ 
+                code: 'success-to-list-ratings',
+                turistSpotFounded: refTuristSpot, 
+                ratingList
+            })
+            .end();
+        return;
     } catch {
         res.status(500)
-        .json({ code: 'unknow-error' })
-        .end();
+            .json({ code: 'unknow-error' })
+            .end();
         return;
     }
 }

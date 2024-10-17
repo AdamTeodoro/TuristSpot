@@ -15,8 +15,8 @@ export const validateUserCreationMiddleware = (req: Request, res: Response, next
     try {
         if (AdminCreationSchema.validate(req).error) {
             res.status(400)
-            .json({ code: 'invalid-request-data' })
-            .end();
+                .json({ code: 'invalid-request-data' })
+                .end();
             return;
         } else {
             next();
@@ -24,8 +24,8 @@ export const validateUserCreationMiddleware = (req: Request, res: Response, next
         }
     } catch {
         res.status(500)
-        .json({ code: 'internal-server-error' })
-        .end();
+            .json({ code: 'internal-server-error' })
+            .end();
         return;
     }
 }

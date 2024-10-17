@@ -29,8 +29,8 @@ export const ListRatingByTuristSpotController = async (
         //verify if turist spot exists
         if (!refTuristSpot) {
             res.status(401)
-            .json({ code: 'invalid-turistspot' })
-            .end();
+                .json({ code: 'invalid-turistspot' })
+                .end();
             return;
         }
         let ratingList = [ ];
@@ -57,17 +57,16 @@ export const ListRatingByTuristSpotController = async (
         }
         // res send to listTuristSpots
         res.status(200)
-        .json({
-            code: 'success-to-list-ratings',
-            ratingList
-        })
-        .end();
+            .json({
+                code: 'success-to-list-ratings',
+                ratingList
+            })
+            .end();
         return;
     } catch(error) {
-        console.log(error);
         res.status(500)
-        .json({ code: 'unknow-error' })
-        .end();
+            .json({ code: 'unknow-error' })
+            .end();
         return;
     }
 }

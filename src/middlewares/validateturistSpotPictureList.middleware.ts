@@ -13,16 +13,16 @@ export const validateturistSpotPictureListMiddleware = (req: Request, res: Respo
     try {
         if (TuristSpotPictureListSchema.validate(req).error) {
             res.status(400)
-            .json({ code: 'invalid-request-data' })
-            .end();
+                .json({ code: 'invalid-request-data' })
+                .end();
             return;
         }
         next();
         return;
     } catch {
         res.status(500)
-        .json({ code: 'unknow-error' })
-        .end();
+            .json({ code: 'unknow-error' })
+            .end();
         return;
     }
 }

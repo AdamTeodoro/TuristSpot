@@ -26,10 +26,9 @@ export const validateTuristSpotPictureMiddleware = async (req: Request, res: Res
         next()
         return;
     } catch(error) {
-        console.log(error);
         res.status(500)
-        .json({ code: 'internal-server-error' })
-        .end();
+            .json({ code: 'internal-server-error' })
+            .end();
         return;
     }
 }

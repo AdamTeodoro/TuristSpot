@@ -31,9 +31,9 @@ export async function UpdateUserController(req: Request, res: Response) {
         //verify if user password is valid
         const isValidPassword = await bcrypt.compare(pass.oldPassword, refKey.passwordHash);
         if (!isValidPassword) {
-            res.status(400)
-            .json({ code: 'invalid-credencials' })
-            .end();
+                res.status(400)
+                .json({ code: 'invalid-credencials' })
+                .end();
             return;
         }
         //update user data
@@ -48,14 +48,13 @@ export async function UpdateUserController(req: Request, res: Response) {
         }
         //send user created
         res.status(200)
-        .json({ code: 'success-to-update-user-data' })
-        .end();
+            .json({ code: 'success-to-update-user-data' })
+            .end();
         return;
     } catch(error) {
-        console.log(error);
         res.status(500)
-        .json({ code: 'unknow-error' })
-        .end();
+            .json({ code: 'unknow-error' })
+            .end();
         return;
     }
 }

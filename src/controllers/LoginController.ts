@@ -22,17 +22,12 @@ export const LoginController = async (req: Request, res: Response) => {
     try {
         const { email, password } = req.body;
         //get user by email
-        const refUser = await userService.findOne({
-            where: {
-                email
-            }
-        });
-        console.log(refUser);
+        const refUser = await userService.findOne({ where: { email } });
         //if user not found reject request access
         if (!refUser) {
             res.status(400)
-            .json({ code: 'invalid-credencials' })
-            .end();
+                .json({ code: 'invalid-credencials' })
+                .end();
             return;
         }
         //verify if user is admin
@@ -49,8 +44,8 @@ export const LoginController = async (req: Request, res: Response) => {
             //verify if simpleUserActive exists
             if (inactivedUser) {
                 res.status(401)
-                .json({ code: 'inactived-user' })
-                .end();
+                    .json({ code: 'inactived-user' })
+                    .end();
                 return;
             }
         }
@@ -60,8 +55,8 @@ export const LoginController = async (req: Request, res: Response) => {
         const isValidPassword = await bcrypt.compare(password, key.passwordHash);
         if (!isValidPassword) {
             res.status(400)
-            .json({ code: 'invalid-credencials' })
-            .end();
+                .json({ code: 'invalid-credencials' })
+                .end();
             return;
         }
         //generate authorization token
@@ -72,18 +67,17 @@ export const LoginController = async (req: Request, res: Response) => {
         });
         //send user and authorization token
         res.status(200)
-        .json({
-            code: 'success-to-login',
-            user: refUser,
-            authorization
-        })
-        .end();
+            .json({
+                code: 'success-to-login',
+                user: refUser,
+                authorization
+            })
+            .end();
         return;
     } catch(error) {
-        console.log("Login Controller Error: ", error);
         res.status(500)
-        .json({ code:'unknow-error' })
-        .end();
+            .json({ code:'unknow-error' })
+            .end();
         return;
     }
 }

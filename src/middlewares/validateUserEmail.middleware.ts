@@ -25,8 +25,8 @@ export const validateEmailExistsMiddleware = async (req: Request, res: Response,
         //if email exists return error
         if (refUser) {
             res.status(403)
-            .json({ code: 'email-already-registered' })
-            .end();
+                .json({ code: 'email-already-registered' })
+                .end();
             return;
         }
         next();
@@ -34,8 +34,8 @@ export const validateEmailExistsMiddleware = async (req: Request, res: Response,
     } catch(error) {
         console.log('falha ao validar e-mail', error);
         res.status(500)
-        .json({ code: 'unknow-error' })
-        .end();
+            .json({ code: 'unknow-error' })
+            .end();
         return;
     }
 }

@@ -14,14 +14,13 @@ export const validateAdminRatingDeletionMiddleware = (req: Request, res: Respons
     try {
         if (AdminRatingDeletionSchema.validate(req).error) {
             res.status(400)
-            .json({ code: 'invalid-request-data' })
-            .end()
+                .json({ code: 'invalid-request-data' })
+                .end()
             return;
         }
         next()
         return;
     } catch(error) {
-        console.log(error);
         res.status(500)
         .json({ code: "unknow-error" })
         .end();

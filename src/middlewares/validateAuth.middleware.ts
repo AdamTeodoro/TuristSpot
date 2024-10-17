@@ -25,9 +25,9 @@ export const validateAuthMiddleware = (req: Request, res: Response, next: NextFu
         jwt.verify(authorization, JWT_SECRET, async (error, decoded) => {
             if (error) {
                 res.status(400)
-                .json({ code: 'invalid-authorization' })
-                .end();
-                return;
+                    .json({ code: 'invalid-authorization' })
+                    .end();
+                    return;
             }
             const { id } = decoded as TokenPayload;
             //get idUser

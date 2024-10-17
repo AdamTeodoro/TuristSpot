@@ -1,6 +1,6 @@
 import { NextFunction, Response } from "express";
-import { TuristSpostListSchema } from "../schemas/requests/TuristSpostList.schema";
 
+import { TuristSpotListSchema } from "../schemas/requests/TuristSpotList.schema";
 
 type Request = {
     query: {
@@ -10,10 +10,10 @@ type Request = {
 
 export const validateTuristSpotListMiddleware =  async (req: Request, res: Response, next: NextFunction) => {
     try {
-        if (TuristSpostListSchema.validate(req).error) {
+        if (TuristSpotListSchema.validate(req).error) {
             res.status(400)
-            .json({ code: 'invalid-request-data' })
-            .end();
+                .json({ code: 'invalid-request-data' })
+                .end();
             return;
         } else {
             next();
@@ -21,8 +21,8 @@ export const validateTuristSpotListMiddleware =  async (req: Request, res: Respo
         }
     } catch {
         res.status(500)
-        .json({ code: 'unknow-error' })
-        .end();
+            .json({ code: 'unknow-error' })
+            .end();
         return;
     }
 }

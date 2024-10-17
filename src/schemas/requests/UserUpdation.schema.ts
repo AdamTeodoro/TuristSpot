@@ -13,13 +13,13 @@ export const UserUpdationSchema = Joi.object({
 
         pass: Joi.object({
             newPassword: Joi.string()
-            .min(8)
-            .max(256),
+                .min(8)
+                .max(256),
     
             oldPassword: Joi.string()
-            .min(8)
-            .max(256)
-            .required()
+                .min(8)
+                .max(256)
+                .required()
         }).required()
 
     }).unknown(false),

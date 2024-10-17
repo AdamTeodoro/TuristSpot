@@ -14,8 +14,8 @@ export const validateTuristSpotFindMiddleware = (req: Request, res: Response, ne
     try {
         if (TuristSpotFindSchema.validate(req).error) {
             res.status(400)
-            .json({ code: 'invalid-request-date' })
-            .end();
+                .json({ code: 'invalid-request-date' })
+                .end();
             return;
         } else {
             next();
@@ -23,8 +23,8 @@ export const validateTuristSpotFindMiddleware = (req: Request, res: Response, ne
         }
     } catch {
         res.status(500)
-        .json({ code: 'unknow-error' })
-        .end();
+            .json({ code: 'unknow-error' })
+            .end();
         return;
     }
 }

@@ -36,16 +36,16 @@ export const ListTuristSpotController = async (req: Request, res: Response, next
         }
         // res send to listTuristSpots
         res.status(200)
-        .json({
-            code: 'success-to-list-turistspots',
-            turistSpotList
-        })
-        .end();
+            .json({
+                code: 'success-to-list-turistspots',
+                turistSpotList
+            })
+            .end();
         return;
     } catch {
         res.status(500)
-        .json({ code: 'unknow-error' })
-        .end();
+            .json({ code: 'unknow-error' })
+            .end();
         return;
     }
 }

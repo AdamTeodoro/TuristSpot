@@ -32,17 +32,15 @@ export async function UpdateRatingController(req: Request, res: Response) {
         //verify if rating exits
         if (!refRating) {
             res.status(400)
-            .json({ code: 'rating-not-exists' })
-            .end();
+                .json({ code: 'rating-not-exists' })
+                .end();
             return;
         }
         //get turistspot
         const refTuristSpot = await turistSpotService.findByPk(idTuristSpot) as ITuristSpot;
         //calculate new rating from turistspot
         const sumAverage = (refTuristSpot.qtdRatings * refTuristSpot.average) - refRating.rating;
-        console.log(sumAverage);
         const newAverage = (sumAverage + rating.rating) / refTuristSpot.qtdRatings;
-        console.log(refTuristSpot.qtdRatings);
         // update turist spot average
         await refTuristSpot.update({
             average: newAverage
@@ -54,14 +52,13 @@ export async function UpdateRatingController(req: Request, res: Response) {
         });
         //send rating created
         res.status(200)
-        .json({ code: 'success-to-update-rating' })
-        .end();
+            .json({ code: 'success-to-update-rating' })
+            .end();
         return;
     } catch(error) {
-        console.log('erro ao criar rating: ', error);
         res.status(500)
-        .json({ code: 'unknow-error' })
-        .end();
+            .json({ code: 'unknow-error' })
+            .end();
         return;
     }
 }

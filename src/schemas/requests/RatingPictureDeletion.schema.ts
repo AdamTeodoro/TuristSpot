@@ -7,10 +7,10 @@ export const RatingPictureDeletionSchema = Joi.object({
     
     query: {
         idPicture: Joi.number()
-        .integer()
-        .min(1)
-        .max(9999999999999)
-        .required(),
+            .integer()
+            .min(1)
+            .max(9999999999999)
+            .required(),
     }
 
 }).unknown(true);

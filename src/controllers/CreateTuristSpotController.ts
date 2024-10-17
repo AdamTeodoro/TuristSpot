@@ -27,17 +27,16 @@ export async function CreateTuristSpotController(req: Request, res: Response) {
         });
         //send turist spot
         res.status(200)
-        .json({
-            code: 'success-to-create-turist-spot',
-            turistSpotCreated
-        })
-        .end();
+            .json({
+                code: 'success-to-create-turist-spot',
+                turistSpotCreated
+            })
+            .end();
         return;
     } catch(error) {
-        console.log(error)
         res.status(500)
-        .json({ code: 'unknow-error' })
-        .end();
+            .json({ code: 'unknow-error' })
+            .end();
         return;
     }
 }

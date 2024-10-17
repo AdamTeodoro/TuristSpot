@@ -29,14 +29,13 @@ export async function RegisterUserController(req: Request, res: Response) {
         });
         //send user created
         res.status(200)
-        .json({ code: 'success-to-create-user', userCreated })
-        .end();
+            .json({ code: 'success-to-create-user', userCreated })
+            .end();
         return;
     } catch(error) {
-        console.log("Falha ao criar usuário");
         res.status(500)
-        .json({ code: 'unknow-error' })
-        .end();
+            .json({ code: 'unknow-error' })
+            .end();
         return;
     }
 }

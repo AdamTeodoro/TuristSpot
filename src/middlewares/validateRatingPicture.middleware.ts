@@ -27,22 +27,22 @@ export const validateRatingPicture = async (
         //verify if rating exists
         if (!refRating) {
             res.status(400)
-            .json({ code: 'invalid-request-rating' })
-            .end();
+                .json({ code: 'invalid-request-rating' })
+                .end();
             return;
         }
         //verify if valid user authenticated
         if (req.idUser !== refRating.idSimpleUser) {
             res.status(401)
-            .json({ code: 'invalid-request-authorization' })
-            .end();
+                .json({ code: 'invalid-request-authorization' })
+                .end();
             return;
         }
         //verify if qtdimagens is valid
         if (refRating.qtdImg >= 5) {
             res.status(400)
-            .json({ code: 'invalid-qtd-image-rating'})
-            .end();
+                .json({ code: 'invalid-qtd-image-rating'})
+                .end();
             return;
         }
         //create rating picture
@@ -58,10 +58,9 @@ export const validateRatingPicture = async (
         next();
         return;
     } catch(error) {
-        console.log(error);
         res.status(500)
-        .json({ code: 'internal-server-error' })
-        .end();
+            .json({ code: 'internal-server-error' })
+            .end();
         return;
     }
 }

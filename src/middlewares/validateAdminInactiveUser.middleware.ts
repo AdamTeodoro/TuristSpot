@@ -16,8 +16,8 @@ export const validateAdminInactiveUserMiddleware = async (req: Request, res: Res
     try {
         if (AdminInactivationSchema.validate(req).error) {
             res.status(400)
-            .json({ code: 'invalid-request-data' })
-            .end();
+                .json({ code: 'invalid-request-data' })
+                .end();
             return;
         } else {
             next();
@@ -25,8 +25,8 @@ export const validateAdminInactiveUserMiddleware = async (req: Request, res: Res
         }
     } catch {
         res.status(500)
-        .json({ code: 'unknow-error' })
-        .end();
+            .json({ code: 'unknow-error' })
+            .end();
         return;
     }
 }

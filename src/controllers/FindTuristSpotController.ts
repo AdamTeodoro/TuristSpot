@@ -26,9 +26,7 @@ export const FindTuristSpotController = async (req: Request, res: Response) => {
         //find by postalcode
         if (postalCode) {
             const listByPostalCode = await turistSpotService.findAll({
-                where: {
-                    postalCode
-                }
+                where: { postalCode }
             });
             turistspotFinded = turistspotFinded.concat(listByPostalCode);
         }
@@ -36,9 +34,7 @@ export const FindTuristSpotController = async (req: Request, res: Response) => {
         if (state) {
             const listByState = await turistSpotService.findAll({
                 where: {
-                    state: {
-                        [Op.iLike]: state,
-                    }
+                    state: { [Op.iLike]: state }
                 }
             });
             turistspotFinded = turistspotFinded.concat(listByState);
@@ -69,9 +65,7 @@ export const FindTuristSpotController = async (req: Request, res: Response) => {
         //remove repeat turistspots
         turistspotFinded.map((turistSpotFound) => {
             const indexNotFound = - turistspotList.findIndex(
-                (turistspot) => {
-                    return turistspot.id  === turistSpotFound.id
-                }
+                (turistspot) => turistspot.id  === turistSpotFound.id 
             );
             if (indexNotFound) {
                 turistspotList.push(turistSpotFound)
@@ -79,17 +73,16 @@ export const FindTuristSpotController = async (req: Request, res: Response) => {
         });
         //send turist spot list
         res.status(200)
-        .json({
-            code: 'success-to-find-turistspot',
-            turistspotList
-        })
-        .end();
+            .json({
+                code: 'success-to-find-turistspot',
+                turistspotList
+            })
+            .end();
         return;
     } catch(error) {
-        console.log(error);
         res.status(500)
-        .json({ code: 'unknow-error' })
-        .end();
+            .json({ code: 'unknow-error' })
+            .end();
         return;
     }
 }

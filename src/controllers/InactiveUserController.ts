@@ -32,13 +32,13 @@ export async function InactiveUserController(req: Request, res: Response) {
         });
         //send response with Admin created
         res.status(200)
-        .json({ code: 'success-to-create-admin', userCreated })
-        .end();
+            .json({ code: 'success-to-create-admin', userCreated })
+            .end();
         return;
     } catch {
         res.status(400)
-        .json({ code: 'fail-to-create-admin' })
-        .end();
+            .json({ code: 'fail-to-create-admin' })
+            .end();
         return;
     }
 }

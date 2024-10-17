@@ -31,8 +31,8 @@ export async function CreateRatingController(req: Request, res: Response) {
         //verify if turistspot is valid
         if (!refturistSpot) {
             res.status(401)
-            .json({ code: 'invalid-turistspot' })
-            .end();
+                .json({ code: 'invalid-turistspot' })
+                .end();
             return;
         }
         // get rating user
@@ -45,8 +45,8 @@ export async function CreateRatingController(req: Request, res: Response) {
         // verify user already create rating
         if (ratingUserExists) {
             res.status(400)
-            .json({ code: 'rating-already-exists' })
-            .end();
+                .json({ code: 'rating-already-exists' })
+                .end();
             return;
         }
         let newAverage;
@@ -57,11 +57,8 @@ export async function CreateRatingController(req: Request, res: Response) {
             newQtdRating = 1;
         } else {
             const sumAverage = (refturistSpot.qtdRatings * refturistSpot.average);
-            console.log(sumAverage);
             newQtdRating = refturistSpot.qtdRatings + 1;
-            console.log(newQtdRating)
             newAverage = (sumAverage + rating.rating) / newQtdRating;
-            console.log(newAverage);
         }
         // update turist spot
         await refturistSpot.update({
@@ -78,17 +75,16 @@ export async function CreateRatingController(req: Request, res: Response) {
         });
         //send rating created
         res.status(200)
-        .json({
-            code: 'success-to-create-rating',
-            createdRating
-        })
-        .end();
+            .json({
+                code: 'success-to-create-rating',
+                createdRating
+            })
+            .end();
         return;
     } catch(error) {
-        console.log('erro ao criar rating: ', error);
         res.status(500)
-        .json({ code: 'unknow-error' })
-        .end();
+            .json({ code: 'unknow-error' })
+            .end();
         return;
     }
 }

@@ -24,8 +24,8 @@ export const CreateRatingPictureController = async (req: Request, res: Response)
         .findByPk(req.idPicture);
         if (!refRatingPicture) {
             res.status(400)
-            .json({ code: 'invalid-request-data' })
-            .end();
+                .json({ code: 'invalid-request-data' })
+                .end();
             return;
         }
         //update rating picture
@@ -35,16 +35,16 @@ export const CreateRatingPictureController = async (req: Request, res: Response)
         });
         //send turist spot
         res.status(200)
-        .json({
-            code: 'success-to-create-turistspot-picture',
-            ratingPictureUpdated
-        })
-        .end();
+            .json({
+                code: 'success-to-create-turistspot-picture',
+                ratingPictureUpdated
+            })
+            .end();
         return;
     } catch { 
         res.status(500)
-        .json({ code: 'unknow-error' })
-        .end();
+            .json({ code: 'unknow-error' })
+            .end();
         return;        
     }
 }

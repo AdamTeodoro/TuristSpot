@@ -13,11 +13,10 @@ type Request = {
 
 export const validateRatingPictureDeletionMiddleware = (req: Request, res: Response, next: NextFunction) => {
     try {
-        console.log('error: ', RatingPictureDeletionSchema.validate(req).error);
         if (RatingPictureDeletionSchema.validate(req).error) {
             res.status(400)
-            .json({ code: 'invalid-request-data' })
-            .end();
+                .json({ code: 'invalid-request-data' })
+                .end();
             return;
         } else {
             next();
@@ -25,8 +24,8 @@ export const validateRatingPictureDeletionMiddleware = (req: Request, res: Respo
         }
     } catch {
         res.status(500)
-        .json({ code: 'unknow-error' })
-        .end();
+            .json({ code: 'unknow-error' })
+            .end();
         return;
     }
 }
